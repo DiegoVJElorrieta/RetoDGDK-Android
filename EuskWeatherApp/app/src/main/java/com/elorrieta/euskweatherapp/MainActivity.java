@@ -50,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(mi);
     }
 
+    public void btnLogin(View v){
+        validarRegistro(v);
+        if(EXISTE_USUARIO == true){
+            Intent i = new Intent(this, MenuPrincipal.class);
+            i.putExtra("nomUsername", txtUsuario.getText().toString());
+            startActivity(i);
+        }
+    }
+
     public void btnRegistro(View v){
         SharedPreferences users = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         String usuario = txtUsuario.getText().toString(), password = txtPassword.getText().toString();

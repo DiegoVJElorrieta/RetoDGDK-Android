@@ -2,9 +2,12 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -22,7 +25,8 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     public void listadoMunicipios(View v){
-
+        Intent i = new Intent(this, ListadoMunicipios.class);
+        startActivity(i);
     }
 
     public void cerrarSesion(View v){

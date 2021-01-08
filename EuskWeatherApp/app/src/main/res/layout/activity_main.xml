@@ -61,7 +61,7 @@
         android:layout_height="55dp"
         android:layout_marginBottom="20dp"
         android:text="LOGIN"
-        android:onClick="validarRegistro"
+        android:onClick="btnLogin"
         app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
