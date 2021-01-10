@@ -2,6 +2,7 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -24,6 +25,10 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnBizkaia = (Button) findViewById(R.id.btnBizkaia);
         btnAraba = (Button) findViewById(R.id.btnAraba);
         btnGipuzkoa = (Button) findViewById(R.id.btnGipuzkoa);
+
+        btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
     }
 
     @Override
@@ -46,5 +51,23 @@ public class ListadoMunicipios extends AppCompatActivity {
                 break;
         }
         return super.onContextItemSelected(menuItem);
+    }
+
+    public void mostrarBizkaia(View v){
+        btnBizkaia.setBackgroundColor(Color.rgb(140, 105, 178));
+        btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
+    }
+
+    public void mostrarAraba(View v){
+        btnAraba.setBackgroundColor(Color.rgb(140, 105, 178));
+        btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
+    }
+
+    public void mostrarGipuzkoa(View v){
+        btnGipuzkoa.setBackgroundColor(Color.rgb(140, 105, 178));
+        btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
     }
 }

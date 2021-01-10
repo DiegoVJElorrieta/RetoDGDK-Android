@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private EditText txtUsuario, txtPassword;
+    private ConnectivityManager connectivityManager = null;
     public static boolean EXISTE_USUARIO;
     public static String usuarioApp;
 
@@ -48,6 +51,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(mi);
+    }
+
+    public void conexionOnClick(View v){
+        try{
+            if(isConnected()){
+                String respuesta = conectar();
+                if(null == respuesta){
+                    Toast.makeText(getApplicationContext(), "ERROR EN LA COMUNICACION", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(this, "CONECTADO", Toast.LENGTH_SHORT).show();
+                }
+            } else{
+                Toast.makeText(getApplicationContext(), "NO INTERNET", Toast.LENGTH_SHORT).show();
+            }
+        } catch (InterruptedException e){
+            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String conectar() throws InterruptedException {
+        ClientThread clientThread = new ClientThread();
+        Thread thread = new Thread(clientThread);
+        thread.start();
+        thread.join();
+
+        return clientThread.getResponse();
+    }
+
+    public boolean isConnected(){
+        boolean ret = false;
+        try{
+            connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected())){
+                ret = true;
+            }
+        } catch(Exception e){
+            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
+        }
+        return ret;
     }
 
     public void btnLogin(View v){

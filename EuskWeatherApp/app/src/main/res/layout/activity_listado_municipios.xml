@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="BIZKAIA"
+        android:onClick="mostrarBizkaia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="ARABA"
+        android:onClick="mostrarAraba"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="GIPUZKOA"
+        android:onClick="mostrarGipuzkoa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.949"
