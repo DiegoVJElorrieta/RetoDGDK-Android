@@ -2,6 +2,10 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,14 +27,54 @@ public class MainActivity extends AppCompatActivity {
     private ConnectivityManager connectivityManager = null;
     private EditText txtUsuario, txtPassword;
     public static String usuarioApp;
+    private ImageView logo;
+
+    private ObjectAnimator animacionAlphaAparecer;
+    private ObjectAnimator animacionAlphaDesaparecer;
+    private ObjectAnimator animacionRotar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        animaciones();
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
+    }
+
+    private void animaciones(){
+        logo = findViewById(R.id.imageView2);
+
+        animacionAlphaAparecer = ObjectAnimator.ofFloat(logo, View.ALPHA, 1.0f,0.0f);
+        animacionAlphaAparecer.setDuration(2500);
+        animacionRotar = ObjectAnimator.ofFloat(logo, "rotation", 0f,360f);
+        animacionRotar.setDuration(2500);
+
+        AnimatorSet animatorSetTodo = new AnimatorSet();
+        animatorSetTodo.playTogether(animacionAlphaAparecer, animacionRotar);
+        animatorSetTodo.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animacionAlphaDesaparecer = ObjectAnimator.ofFloat(logo, View.ALPHA, 0.0f,1.0f);
+                animacionAlphaDesaparecer.setDuration(2500);
+                animacionRotar = ObjectAnimator.ofFloat(logo, "rotation", 0f,360f);
+                animacionRotar.setDuration(2500);
+
+                AnimatorSet animatorSetTodo = new AnimatorSet();
+                animatorSetTodo.playTogether(animacionAlphaDesaparecer, animacionRotar);
+                animatorSetTodo.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        animaciones();
+                    }
+                });
+                animatorSetTodo.start();
+            }
+        });
+        animatorSetTodo.start();
     }
 
     @Override
