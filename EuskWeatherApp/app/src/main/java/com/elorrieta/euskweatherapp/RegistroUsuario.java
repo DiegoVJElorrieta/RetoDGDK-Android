@@ -57,7 +57,7 @@ public class RegistroUsuario extends AppCompatActivity {
             editor.commit();
             AlertDialog.Builder msj = new AlertDialog.Builder(this);
             msj.setTitle(R.string.tituloUsuCreado);
-            msj.setMessage(R.string.descriAcercaDe);
+            msj.setMessage(R.string.descriUsuCreado);
             msj.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

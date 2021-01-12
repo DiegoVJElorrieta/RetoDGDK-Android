@@ -8,4 +8,8 @@
         android:id="@+id/itemCambioPass"
         android:title="@string/opcCambioContra"/>
 
+    <item
+        android:id="@+id/itemCerrarSesion"
+        android:title="CERRAR SESION"/>
+
 </menu>
