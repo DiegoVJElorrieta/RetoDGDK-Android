@@ -3,9 +3,9 @@
 
     <item
         android:id="@+id/itemAcercaDe"
-        android:title="Acerca de..." />
+        android:title="@string/opcAcercaDe" />
     <item
         android:id="@+id/itemCambioPass"
-        android:title="Cambiar contraseña"/>
+        android:title="@string/opcCambioContra"/>
 
 </menu>

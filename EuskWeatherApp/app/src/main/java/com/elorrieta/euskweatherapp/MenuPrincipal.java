@@ -21,7 +21,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Toast.makeText(this, "DEBES CERRAR SESION", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.salirMenu, Toast.LENGTH_SHORT).show();
     }
 
     public void listadoMunicipios(View v){
@@ -31,7 +31,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     public void cerrarSesion(View v){
         MainActivity.EXISTE_USUARIO = false;
-        Toast.makeText(this, "SESION CERRADA CORRECTAMENTE", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.cierreSesionCorrecto, Toast.LENGTH_LONG).show();
         finish();
     }
 

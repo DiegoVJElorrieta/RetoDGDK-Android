@@ -45,19 +45,19 @@ public class RegistroUsuario extends AppCompatActivity {
         SharedPreferences users = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = users.edit();
         if((usuario.isEmpty() == true) && (contrasenia.equals(contraseniaConfirm) == false)){
-            Toast.makeText(this, "NO PUEDES DEJAR NADA VACIO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.camposVaciosRegistro, Toast.LENGTH_SHORT).show();
         } else if(contrasenia.equals(contraseniaConfirm) == false){
-            Toast.makeText(this, "NO COINCIDEN", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.contrasNoCoinciden, Toast.LENGTH_SHORT).show();
         } else if(usuario.isEmpty() == true){
-            Toast.makeText(this, "DEBES ESTABLECER NOMBRE USUARIO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
         } else if(contrasenia.isEmpty() == true || contraseniaConfirm.isEmpty() == true) {
-            Toast.makeText(this, "RELLENA LAS CONTRASEÑAS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.contrasVacias, Toast.LENGTH_SHORT).show();
         } else{
             editor.putString(usuario, contrasenia);
             editor.commit();
             AlertDialog.Builder msj = new AlertDialog.Builder(this);
-            msj.setTitle("USUARIO CREADO");
-            msj.setMessage("Pulse ok para regresar a inicio");
+            msj.setTitle(R.string.tituloUsuCreado);
+            msj.setMessage(R.string.descriAcercaDe);
             msj.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

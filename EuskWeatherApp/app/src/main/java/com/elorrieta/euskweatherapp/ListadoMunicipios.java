@@ -35,7 +35,7 @@ public class ListadoMunicipios extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        menu.setHeaderTitle("Pulsa sobre la opcion deseada");
+        menu.setHeaderTitle(R.string.tituloMenuContextual);
         inflater.inflate(R.menu.menulistados, menu);
     }
 

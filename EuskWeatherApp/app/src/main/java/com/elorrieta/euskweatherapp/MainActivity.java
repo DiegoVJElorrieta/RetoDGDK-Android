@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         int id = mi.getItemId();
         if(id == R.id.itemAcercaDe){
             AlertDialog.Builder msj = new AlertDialog.Builder(this);
-            msj.setTitle("Acerca de...");
-            msj.setMessage("App desarrollada por EuskWeather Group");
+            msj.setTitle(R.string.tituloAcercaDe);
+            msj.setMessage(R.string.descriAcercaDe);
             AlertDialog mostrarMensaje = msj.create();
             mostrarMensaje.show();
         }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("nomUsu", txtUsuario.getText().toString());
             startActivity(i);
         } else{
-            Toast.makeText(this, "EL USUARIO YA EXISTE", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.usuarioExiste, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -122,14 +122,14 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences users = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
         String user = users.getString(usuario, "");
         if(user.length() == 0){
-            Toast.makeText(this, "NO VALIDO", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.usuarioNoValido, Toast.LENGTH_LONG).show();
             EXISTE_USUARIO = false;
         } else{
             if(password.equals(user)){
-                Toast.makeText(this, "INICIO EXITOSO", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.inicioSesionCorrecto, Toast.LENGTH_LONG).show();
                 EXISTE_USUARIO = true;
             } else{
-                Toast.makeText(this, "CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.contraIncorrecta, Toast.LENGTH_LONG).show();
             }
         }
     }

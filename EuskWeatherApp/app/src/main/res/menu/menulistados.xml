@@ -3,9 +3,9 @@
 
     <item
         android:id="@+id/itemInfoMunicipio"
-        android:title="Información" />
+        android:title="@string/opcInfo" />
     <item
         android:id="@+id/itemAgregarImgMuni"
-        android:title="Agregar imagen" />
+        android:title="@string/opcAgregarImg" />
 
 </menu>
