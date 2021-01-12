@@ -12,14 +12,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ListadoMunicipios extends AppCompatActivity {
 
     private Button btnBizkaia, btnAraba, btnGipuzkoa;
     private ListView listViewMunicipios;
+    private ArrayList<String> listaMunicipios;
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +34,20 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnBizkaia = (Button) findViewById(R.id.btnBizkaia);
         btnAraba = (Button) findViewById(R.id.btnAraba);
         btnGipuzkoa = (Button) findViewById(R.id.btnGipuzkoa);
+        listViewMunicipios = (ListView) findViewById(R.id.listViewMunicipios);
+        registerForContextMenu(listViewMunicipios);
 
         btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
+
+        listViewMunicipios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -83,6 +98,12 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnBizkaia.setBackgroundColor(Color.rgb(140, 105, 178));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
+        String prueba = "Hola mundo";
+
+        listaMunicipios = new ArrayList<>();
+        listaMunicipios.add(prueba);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
+        listViewMunicipios.setAdapter(arrayAdapter);
     }
 
     public void mostrarAraba(View v){
