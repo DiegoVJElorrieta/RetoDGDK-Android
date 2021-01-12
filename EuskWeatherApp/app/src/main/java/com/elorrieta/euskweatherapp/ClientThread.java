@@ -9,44 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClientThread implements Runnable {
-
-    /*private String resultado;
-
-    public ClientThread(){}
-
-    @Override
-    public void run(){
-        ResultSet rs = null;
-        PreparedStatement st = null;
-        Connection con = null;
-        String IP, PUERTO, BBDD;
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            IP = "192.168.13.252";
-            PUERTO = "3306";
-            BBDD = "test";
-            String url = "jdbc:mysql://" + IP + ":" + PUERTO + "/" + BBDD + "?serverTimezone=UTC";
-            con = DriverManager.getConnection(url, "root", "");
-            String sql = "SELECT * FROM prueba";
-            st = con.prepareStatement(sql);
-            rs = st.executeQuery();
-
-            while(rs.next()){
-                String var = rs.getString("nombre");
-                Log.i("XXXXXXX", var);
-                resultado = var;
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException es){
-            es.printStackTrace();
-        }
-    }
-
-    public String getResponse(){
-        return resultado;
-    }*/
-
     private String sResultado;
 
     public ClientThread() {
@@ -61,7 +23,7 @@ public class ClientThread implements Runnable {
         String sPuerto;
         String sBBDD;
         try {
-            Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//
+            Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
             sIP = "192.168.13.252";
             sPuerto = "3306";
             sBBDD = "test";
@@ -105,5 +67,4 @@ public class ClientThread implements Runnable {
     public String getResponse() {
         return sResultado;
     }
-
 }
