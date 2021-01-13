@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(mi);
     }
 
-    public void conectarOnClick(View v) {
+    /*public void conectarOnClick(View v) {
         try {
             if (isConnected()) {
                 String sRespuesta = conectar();
@@ -114,15 +114,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {// This cannot happen!
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
-    private String conectar() throws InterruptedException {
+    /*private String conectar() throws InterruptedException {
         ClientThread clientThread = new ClientThread();
         Thread thread = new Thread(clientThread);
         thread.start();
         thread.join(); // Esperar respusta del servidor...
         return clientThread.getResponse();
-    }
+    }*/
 
     public boolean isConnected() {
         boolean ret = false;

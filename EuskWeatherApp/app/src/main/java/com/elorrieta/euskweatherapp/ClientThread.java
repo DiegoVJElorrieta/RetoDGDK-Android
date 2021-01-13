@@ -1,17 +1,21 @@
 package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
+import android.widget.Button;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClientThread implements Runnable {
     private String sResultado;
+    private ArrayList<String> listaMunicipios;
 
-    public ClientThread() {
+    public ClientThread(ArrayList<String> listaMunicipios) {
+        this.listaMunicipios = listaMunicipios;
     }
 
     @Override
@@ -24,18 +28,19 @@ public class ClientThread implements Runnable {
         String sBBDD;
         try {
             Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
-            sIP = "192.168.13.252";
+            sIP = "192.168.13.231";
             sPuerto = "3306";
-            sBBDD = "test";
+            sBBDD = "pruebaandroiddef";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "SELECT * FROM prueba";
+            String sql = "SELECT * FROM `'estaciones validado` where Campo2='" + ListadoMunicipios.nombreProv + "'";
             st = con.prepareStatement(sql);
             rs = st.executeQuery();//--
             while (rs.next()) {
-                String var1 = rs.getString("nombre");
+                String var1 = rs.getString("Campo1");
                 Log.i("XXXXXXX", var1);
                 sResultado = var1;
+                listaMunicipios.add(sResultado);
             }
         } catch (ClassNotFoundException e) {
             Log.e("ClassNotFoundException", "");
@@ -64,7 +69,7 @@ public class ClientThread implements Runnable {
         }
     }
 
-    public String getResponse() {
-        return sResultado;
+    public ArrayList getResponse() {
+        return listaMunicipios;
     }
 }
