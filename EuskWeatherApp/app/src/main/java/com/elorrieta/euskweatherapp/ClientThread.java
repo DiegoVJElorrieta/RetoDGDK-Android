@@ -1,7 +1,6 @@
 package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
-import android.widget.Button;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
