@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu m){
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCambioContra = m.findItem(R.id.itemCambioPass);
+        MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
         itemCambioContra.setVisible(false);
+        itemCerrarSesion.setVisible(false);
         return true;
     }
 

@@ -18,24 +18,30 @@ import android.widget.ImageView;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private ImageView logo;
+    private ImageView logo1;
     private ImageView logo2;
+    private ImageView logo3;
 
     private ObjectAnimator animacionAlpha;
     private ObjectAnimator animacionAlphaReves;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        logo = findViewById(R.id.imageView);
+        logo1 = findViewById(R.id.imageView);
         Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-        logo.startAnimation(animationScale);
+        logo1.startAnimation(animationScale);
 
-        animaciones();
+        logo2 = findViewById(R.id.imageView1);
+        animaciones(logo2);
+        logo3 = findViewById(R.id.imageView3);
+        animaciones(logo3);
+
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -44,20 +50,20 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },2500);
+        },3500);
     }
 
-    private void animaciones(){
-        logo2 = findViewById(R.id.imageView1);
+    private void animaciones(ImageView logo){
 
-        animacionAlpha = ObjectAnimator.ofFloat(logo2, View.ALPHA, 1.0F,0.0f);
+
+        animacionAlpha = ObjectAnimator.ofFloat(logo, View.ALPHA, 1.0F,0.0f);
         animacionAlpha.setDuration(500);
         AnimatorSet animatorSetAlpha = new AnimatorSet();
         animatorSetAlpha.play(animacionAlpha);
         animatorSetAlpha.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                animacionAlphaReves = ObjectAnimator.ofFloat(logo2, View.ALPHA, 0.0F,1.0f);
+                animacionAlphaReves = ObjectAnimator.ofFloat(logo, View.ALPHA, 0.0F,1.0f);
                 animacionAlphaReves.setDuration(500);
                 AnimatorSet animacionSetAlphaReves = new AnimatorSet();
                 animacionSetAlphaReves.play(animacionAlphaReves);
@@ -65,7 +71,7 @@ public class SplashScreen extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animator animation) {
 
-                        animaciones();
+                        animaciones(logo);
                     }
 
                 });

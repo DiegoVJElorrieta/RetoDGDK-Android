@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MenuPrincipal">
 
     <TextView
@@ -31,11 +32,11 @@
 
     <Button
         android:id="@+id/btnListaMunicipios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/btnListaMunicipios"
         android:onClick="listadoMunicipios"
+        android:text="@string/btnListaMunicipios"
         app:layout_constraintBottom_toTopOf="@+id/btnListaEspaciosNaturales"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -43,8 +44,8 @@
 
     <Button
         android:id="@+id/btnListaEspaciosNaturales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btnListaEspaciosNaturales"
         app:layout_constraintBottom_toTopOf="@+id/btnFavoritos"
@@ -53,8 +54,8 @@
 
     <Button
         android:id="@+id/btnFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btnMisFavoritos"
         app:layout_constraintBottom_toTopOf="@+id/btnTopListados"
@@ -64,8 +65,8 @@
 
     <Button
         android:id="@+id/btnTopListados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btnTopListados"
         app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
@@ -75,12 +76,15 @@
 
     <Button
         android:id="@+id/btnCerrarSesion"
-        android:layout_width="354dp"
-        android:layout_height="55dp"
+        android:layout_width="255dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="180dp"
-        android:text="@string/btnCerrarSesion"
         android:onClick="cerrarSesion"
+        android:text="@string/btnCerrarSesion"
+        android:textColor="@android:color/black"
+        app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="#FFFFFF" />
 </androidx.constraintlayout.widget.ConstraintLayout>

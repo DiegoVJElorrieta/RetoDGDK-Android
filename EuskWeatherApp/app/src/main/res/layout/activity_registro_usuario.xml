@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".RegistroUsuario">
 
     <TextView
         android:id="@+id/lblConfirmPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="28dp"
         android:layout_marginStart="56dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/lblContraConfirm"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/txtContraConfirm"
@@ -21,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/lblContra"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/txtContra"
@@ -29,10 +31,10 @@
 
     <EditText
         android:id="@+id/txtContra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="205dp"
+        android:layout_height="44dp"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/lblConfirmPass"
@@ -40,8 +42,8 @@
 
     <EditText
         android:id="@+id/txtNomApe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="211dp"
+        android:layout_height="41dp"
         android:layout_marginStart="56dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
@@ -53,10 +55,10 @@
 
     <EditText
         android:id="@+id/txtCorreo"
-        android:layout_width="246dp"
-        android:layout_height="42dp"
+        android:layout_width="208dp"
+        android:layout_height="43dp"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/hintCorreoElectronico"
         android:inputType="textEmailAddress"
@@ -68,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/lblNomUsuario"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/txtNomUsuario"
@@ -87,10 +89,10 @@
 
     <EditText
         android:id="@+id/txtNomUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="207dp"
+        android:layout_height="45dp"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/hintNomUsuario"
         android:inputType="textPersonName"
@@ -111,10 +113,10 @@
 
     <EditText
         android:id="@+id/txtDireccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="208dp"
+        android:layout_height="41dp"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/hintDireccion"
         android:inputType="textPersonName"
@@ -128,6 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="96dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/lblNomApellidos"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/txtNomApe"
@@ -137,25 +140,24 @@
 
     <EditText
         android:id="@+id/txtContraConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="204dp"
+        android:layout_height="38dp"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="100dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="252dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
-        android:text="REGISTRAR"
+        android:layout_width="183dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="16dp"
         android:onClick="registrarUsuario"
+        android:text="REGISTRAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

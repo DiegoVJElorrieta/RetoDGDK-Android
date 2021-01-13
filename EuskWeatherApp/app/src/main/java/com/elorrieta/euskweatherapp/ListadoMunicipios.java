@@ -64,8 +64,8 @@ public class ListadoMunicipios extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu m){
         getMenuInflater().inflate(R.menu.menuopciones, m);
-        MenuItem itemCambioContra = m.findItem(R.id.itemCambioPass);
-        itemCambioContra.setVisible(false);
+        MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
+        itemCerrarSesion.setVisible(false);
         return true;
     }
 
