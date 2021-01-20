@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     public static boolean EXISTE_USUARIO;
@@ -28,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtUsuario, txtPassword;
     public static String usuarioApp;
     private ImageView logo;
+    public static boolean INSERCION;
 
     private ObjectAnimator animacionAlphaAparecer;
     private ObjectAnimator animacionAlphaDesaparecer;
@@ -139,6 +148,38 @@ public class MainActivity extends AppCompatActivity {
             } else{
                 Toast.makeText(this, R.string.contraIncorrecta, Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void conectar() throws InterruptedException {
+        HiloInsercionesModificaciones hilo = new HiloInsercionesModificaciones();
+        Thread thread = new Thread(hilo);
+        thread.start();
+        thread.join();
+    }
+
+    public boolean isConnected() {
+        boolean ret = false;
+        try {
+            connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if ((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected()))
+                ret = true;
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
+        }
+        return ret;
+    }
+
+    public void ingresarUsuario(View v){
+        try {
+            if (isConnected()) {
+                conectar();
+            } else {
+                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {// This cannot happen!
+            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
     }
 

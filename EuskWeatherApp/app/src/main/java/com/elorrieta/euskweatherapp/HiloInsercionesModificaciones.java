@@ -9,15 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ClientThread implements Runnable {
-    private String sResultado;
-    private ArrayList<String> listaMunicipios;
+public class HiloInsercionesModificaciones implements Runnable{
 
-    public ClientThread(){}
-
-    public ClientThread(ArrayList<String> listaMunicipios) {
-        this.listaMunicipios = listaMunicipios;
-    }
+    public HiloInsercionesModificaciones(){}
 
     @Override
     public void run() {
@@ -34,21 +28,9 @@ public class ClientThread implements Runnable {
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            if(MainActivity.INSERCION == true){
-                String sql = "INSERT INTO usuarios VALUES(2, 'prueba2', 'bbbb', 'adios@h.com', 'username2', 'reqr')";
-                st = con.prepareStatement(sql);
-                st.executeUpdate();
-            }else if(ListadoMunicipios.CONSULTA_MUNICIPIOS == true){
-                String sql = "SELECT * FROM `municipios` where idProvincia=" + ListadoMunicipios.idProvincia;
-                st = con.prepareStatement(sql);
-                rs = st.executeQuery();//--
-                while (rs.next()) {
-                    String var1 = rs.getString("nombreMuni");
-                    Log.i("XXXXXXX", var1);
-                    sResultado = var1;
-                    listaMunicipios.add(sResultado);
-                }
-            }
+            String sql = "INSERT INTO usuarios VALUES(2, 'prueba2', 'bbbb', 'adios@h.com', 'username2', 'reqr')";
+            st = con.prepareStatement(sql);
+            st.executeUpdate();
         } catch (ClassNotFoundException e) {
             Log.e("ClassNotFoundException", "");
             e.printStackTrace();
@@ -76,7 +58,4 @@ public class ClientThread implements Runnable {
         }
     }
 
-    public ArrayList getResponse() {
-        return listaMunicipios;
-    }
 }

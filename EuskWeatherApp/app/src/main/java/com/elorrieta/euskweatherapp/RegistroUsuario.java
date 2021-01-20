@@ -7,16 +7,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegistroUsuario extends AppCompatActivity {
 
     private EditText txtNomApe, txtDireccion, txtCorreo, txtNomUsuario, txtContra, txtContraConfirm;
     private Button btnRegistrar;
     Bundle datos;
+    public static String s, sa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

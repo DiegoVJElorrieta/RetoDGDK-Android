@@ -28,7 +28,8 @@ public class ListadoMunicipios extends AppCompatActivity {
     private ArrayList<String> listaMunicipios;
     private ArrayAdapter<String> arrayAdapter;
     private ConnectivityManager connectivityManager = null;
-    public static String nombreProv = null;
+    public static boolean CONSULTA_MUNICIPIOS;
+    public static int idProvincia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +121,7 @@ public class ListadoMunicipios extends AppCompatActivity {
     }
 
     public void mostrarBizkaia(View v){
-        nombreProv = "Bizkaia";
+        idProvincia = 48;
         btnBizkaia.setBackgroundColor(Color.rgb(140, 105, 178));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
@@ -128,6 +129,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         listaMunicipios = new ArrayList<>();
         try {
             if (isConnected()) {
+                CONSULTA_MUNICIPIOS = true;
                 listaMunicipios.clear();
                 listaMunicipios = conectar();
             } else {
@@ -142,7 +144,7 @@ public class ListadoMunicipios extends AppCompatActivity {
     }
 
     public void mostrarAraba(View v){
-        nombreProv = "Araba/Álava";
+        idProvincia = 1;
         btnAraba.setBackgroundColor(Color.rgb(140, 105, 178));
         btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
@@ -151,6 +153,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         listaMunicipios = new ArrayList<>();
         try {
             if (isConnected()) {
+                CONSULTA_MUNICIPIOS = true;
                 listaMunicipios.clear();
                 listaMunicipios = conectar();
             } else {
@@ -162,10 +165,11 @@ public class ListadoMunicipios extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
         listViewMunicipios.setAdapter(arrayAdapter);
+        CONSULTA_MUNICIPIOS = false;
     }
 
     public void mostrarGipuzkoa(View v){
-        nombreProv = "Gipuzkoa";
+        idProvincia = 20;
         btnGipuzkoa.setBackgroundColor(Color.rgb(140, 105, 178));
         btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
@@ -174,6 +178,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         listaMunicipios = new ArrayList<>();
         try {
             if (isConnected()) {
+                CONSULTA_MUNICIPIOS = true;
                 listaMunicipios.clear();
                 listaMunicipios = conectar();
             } else {
@@ -185,5 +190,6 @@ public class ListadoMunicipios extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
         listViewMunicipios.setAdapter(arrayAdapter);
+        CONSULTA_MUNICIPIOS = false;
     }
 }
