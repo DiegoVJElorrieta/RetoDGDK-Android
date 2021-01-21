@@ -1,26 +1,22 @@
 package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class HiloInsercionesModificaciones implements Runnable{
+public class HiloComprobarUsuario implements Runnable{
 
-    private String nomApe, direccion, mail, nomUsu, contrasenia;
+    private String usuario, contrasenia;
 
-    public HiloInsercionesModificaciones(){}
+    public HiloComprobarUsuario(){}
 
-    public HiloInsercionesModificaciones(String nomApe, String direccion, String mail, String nomUsu, String contrasenia){
-        //CONSTRUCTOR PARA INSERCIONES DE USUARIOS
-        this.nomApe = nomApe;
-        this.direccion = direccion;
-        this.mail = mail;
-        this.nomUsu = nomUsu;
+    public HiloComprobarUsuario(String usuario, String contrasenia){
+        this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
 
@@ -39,10 +35,18 @@ public class HiloInsercionesModificaciones implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "INSERT INTO usuarios(nombreApellido, direccion, mail, nickUsuario, contrasenia) " +
-                    "VALUES('" + this.nomApe + "', '" + this.direccion + "', '" + this.mail + "', '" + this.nomUsu + "', '" + this.contrasenia + "')";
+            String sql = "SELECT nickUsuario, contrasenia FROM usuarios WHERE nickUsuario='" + this.usuario + "'";
             st = con.prepareStatement(sql);
-            st.executeUpdate();
+            rs = st.executeQuery();
+            while(rs.next()){
+                String nomUsu = rs.getString("nickUsuario");
+                String contrasenia = rs.getString("contrasenia");
+                if(this.usuario.equals(nomUsu) && this.contrasenia.equals(contrasenia)){
+                    MainActivity.EXISTE_USUARIO = true;
+                }
+
+            }
+
         } catch (ClassNotFoundException e) {
             Log.e("ClassNotFoundException", "");
             e.printStackTrace();

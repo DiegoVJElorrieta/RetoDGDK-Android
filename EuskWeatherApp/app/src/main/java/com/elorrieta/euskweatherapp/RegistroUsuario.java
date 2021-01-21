@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ public class RegistroUsuario extends AppCompatActivity {
     private EditText txtNomApe, txtDireccion, txtCorreo, txtNomUsuario, txtContra, txtContraConfirm;
     private Button btnRegistrar;
     Bundle datos;
+    private ConnectivityManager connectivityManager = null;
     public static String s, sa;
 
     @Override
@@ -46,7 +49,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
     }
 
-    public void registrarUsuario(View v){
+    /*public void registrarUsuario(View v){
         String usuario = txtNomUsuario.getText().toString();
         String contrasenia = txtContra.getText().toString();
         String contraseniaConfirm = txtContraConfirm.getText().toString();
@@ -63,6 +66,76 @@ public class RegistroUsuario extends AppCompatActivity {
         } else{
             editor.putString(usuario, contrasenia);
             editor.commit();
+            AlertDialog.Builder msj = new AlertDialog.Builder(this);
+            msj.setTitle(R.string.tituloUsuCreado);
+            msj.setMessage(R.string.descriUsuCreado);
+            msj.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog mostrarMensaje = msj.create();
+            mostrarMensaje.show();
+        }
+    }*/
+
+    private void conectar() throws InterruptedException {
+        String nomApellidos = txtNomApe.getText().toString();
+        String direccion = txtDireccion.getText().toString();
+        String mail = txtCorreo.getText().toString();
+        String usuario = txtNomUsuario.getText().toString();
+        String contrasenia = txtContra.getText().toString();
+        HiloInsercionesModificaciones hilo = new HiloInsercionesModificaciones(nomApellidos, direccion, mail, usuario, contrasenia);
+        Thread thread = new Thread(hilo);
+        thread.start();
+        thread.join();
+    }
+
+    public boolean isConnected() {
+        boolean ret = false;
+        try {
+            connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if ((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected()))
+                ret = true;
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
+        }
+        return ret;
+    }
+
+    public void ingresarUsuario(View v){
+        String nomApellidos = txtNomApe.getText().toString();
+        String direccion = txtDireccion.getText().toString();
+        String mail = txtCorreo.getText().toString();
+        String usuario = txtNomUsuario.getText().toString();
+        String contrasenia = txtContra.getText().toString();
+        String contraseniaConfirm = txtContraConfirm.getText().toString();
+        if((nomApellidos.isEmpty() == true) && (direccion.isEmpty() == true) && (mail.isEmpty() == true) && (usuario.isEmpty() == true) && (contrasenia.equals(contraseniaConfirm) == false)){
+            Toast.makeText(this, R.string.camposVaciosRegistro, Toast.LENGTH_SHORT).show();
+        } else if(contrasenia.equals(contraseniaConfirm) == false){
+            Toast.makeText(this, R.string.contrasNoCoinciden, Toast.LENGTH_SHORT).show();
+        } else if(usuario.isEmpty() == true){
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
+        } else if(contrasenia.isEmpty() == true || contraseniaConfirm.isEmpty() == true) {
+            Toast.makeText(this, R.string.contrasVacias, Toast.LENGTH_SHORT).show();
+        } else if(nomApellidos.isEmpty() == true){
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
+        } else if(direccion.isEmpty() == true){
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
+        } else if(mail.isEmpty() == true){
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
+        } else{
+            try {
+                if (isConnected()) {
+                    conectar();
+                } else {
+                    Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {// This cannot happen!
+                Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+            }
             AlertDialog.Builder msj = new AlertDialog.Builder(this);
             msj.setTitle(R.string.tituloUsuCreado);
             msj.setMessage(R.string.descriUsuCreado);

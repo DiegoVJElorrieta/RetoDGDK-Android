@@ -94,7 +94,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="28dp"
         android:text="Button"
-        android:onClick="ingresarUsuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void validarRegistro(View v){
+    /*public void validarRegistro2(View v){
         String usuario = txtUsuario.getText().toString();
         usuarioApp = usuario;
         String password = txtPassword.getText().toString();
@@ -149,9 +149,46 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.contraIncorrecta, Toast.LENGTH_LONG).show();
             }
         }
-    }
+    }*/
 
     private void conectar() throws InterruptedException {
+        String usuario = txtUsuario.getText().toString();
+        String password = txtPassword.getText().toString();
+        HiloComprobarUsuario hilo = new HiloComprobarUsuario(usuario, password);
+        Thread thread = new Thread(hilo);
+        thread.start();
+        thread.join();
+    }
+
+    public boolean isConnected() {
+        boolean ret = false;
+        try {
+            connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if ((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected()))
+                ret = true;
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
+        }
+        return ret;
+    }
+
+    public void validarRegistro(View v){
+        String usuario = txtUsuario.getText().toString();
+        usuarioApp = usuario;
+        String password = txtPassword.getText().toString();
+        try {
+            if (isConnected()) {
+                conectar();
+            } else {
+                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {// This cannot happen!
+            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*private void conectar() throws InterruptedException {
         HiloInsercionesModificaciones hilo = new HiloInsercionesModificaciones();
         Thread thread = new Thread(hilo);
         thread.start();
@@ -181,6 +218,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {// This cannot happen!
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
 }

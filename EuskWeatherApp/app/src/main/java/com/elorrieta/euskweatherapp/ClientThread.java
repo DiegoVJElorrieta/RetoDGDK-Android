@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 public class ClientThread implements Runnable {
     private String sResultado;
-    private ArrayList<String> listaMunicipios;
+    private ArrayList<Municipio> listaMunicipios;
+    private Municipio m;
 
     public ClientThread(){}
 
-    public ClientThread(ArrayList<String> listaMunicipios) {
+    public ClientThread(ArrayList<Municipio> listaMunicipios) {
         this.listaMunicipios = listaMunicipios;
     }
 
@@ -35,18 +36,32 @@ public class ClientThread implements Runnable {
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
             if(MainActivity.INSERCION == true){
-                String sql = "INSERT INTO usuarios VALUES(2, 'prueba2', 'bbbb', 'adios@h.com', 'username2', 'reqr')";
+                String sql = "SELECT * FROM municipios";
                 st = con.prepareStatement(sql);
-                st.executeUpdate();
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nomMuni = rs.getString("nombreMuni");
+                    String alcaldeMuni = rs.getString("alcalde");
+                    String webMuni = rs.getString("webMunicipio");
+                    m = new Municipio();
+                    m.setNombreMuni(nomMuni);
+                    m.setAlcaldeMuni(alcaldeMuni);
+                    m.setWebMuni(webMuni);
+                    listaMunicipios.add(m);
+                }
             }else if(ListadoMunicipios.CONSULTA_MUNICIPIOS == true){
-                String sql = "SELECT * FROM `municipios` where idProvincia=" + ListadoMunicipios.idProvincia;
+                String sql = "SELECT * FROM municipios WHERE idProvincia=" + ListadoMunicipios.idProvincia;
                 st = con.prepareStatement(sql);
-                rs = st.executeQuery();//--
-                while (rs.next()) {
-                    String var1 = rs.getString("nombreMuni");
-                    Log.i("XXXXXXX", var1);
-                    sResultado = var1;
-                    listaMunicipios.add(sResultado);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nomMuni = rs.getString("nombreMuni");
+                    String alcaldeMuni = rs.getString("alcalde");
+                    String webMuni = rs.getString("webMunicipio");
+                    m = new Municipio();
+                    m.setNombreMuni(nomMuni);
+                    m.setAlcaldeMuni(alcaldeMuni);
+                    m.setWebMuni(webMuni);
+                    listaMunicipios.add(m);
                 }
             }
         } catch (ClassNotFoundException e) {

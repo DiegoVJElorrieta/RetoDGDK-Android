@@ -2,8 +2,11 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -25,7 +28,8 @@ public class ListadoMunicipios extends AppCompatActivity {
 
     private Button btnBizkaia, btnAraba, btnGipuzkoa;
     private ListView listViewMunicipios;
-    private ArrayList<String> listaMunicipios;
+    private RecyclerView recyclerViewMunicipios;
+    private ArrayList<Municipio> listaMunicipios;
     private ArrayAdapter<String> arrayAdapter;
     private ConnectivityManager connectivityManager = null;
     public static boolean CONSULTA_MUNICIPIOS;
@@ -39,20 +43,14 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnBizkaia = (Button) findViewById(R.id.btnBizkaia);
         btnAraba = (Button) findViewById(R.id.btnAraba);
         btnGipuzkoa = (Button) findViewById(R.id.btnGipuzkoa);
-        listViewMunicipios = (ListView) findViewById(R.id.listViewMunicipios);
-        registerForContextMenu(listViewMunicipios);
+        recyclerViewMunicipios = (RecyclerView) findViewById(R.id.recyclerViewMunicipios);
 
         btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
 
-        listViewMunicipios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
-                startActivity(i);
-            }
-        });
+
+
     }
 
     @Override
@@ -75,28 +73,6 @@ public class ListadoMunicipios extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(mi);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        menu.setHeaderTitle(R.string.tituloMenuContextual);
-        inflater.inflate(R.menu.menulistados, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem menuItem){
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
-        switch (menuItem.getItemId()){
-            case R.id.itemInfoMunicipio:
-
-                break;
-            case R.id.itemAgregarImgMuni:
-
-                break;
-        }
-        return super.onContextItemSelected(menuItem);
     }
 
     private ArrayList conectar() throws InterruptedException {
@@ -139,8 +115,32 @@ public class ListadoMunicipios extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        listViewMunicipios.setAdapter(arrayAdapter);
+        MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Municipio item) {
+                AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
+                mensaje.setTitle("INFO DE MUNICIPIO");
+                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
+                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                        "Nº de telefono: " + item.getWebMuni());
+                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
+                        startActivity(i);
+                    }
+                });
+                mensaje.show();
+            }
+        });
+        recyclerViewMunicipios.setAdapter(ma);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
+
+        // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
+        //listViewMunicipios.setAdapter(arrayAdapter);
+        CONSULTA_MUNICIPIOS = false;
     }
 
     public void mostrarAraba(View v){
@@ -163,8 +163,30 @@ public class ListadoMunicipios extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        listViewMunicipios.setAdapter(arrayAdapter);
+        MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Municipio item) {
+                AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
+                mensaje.setTitle("INFO DE MUNICIPIO");
+                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
+                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                        "Nº de telefono: " + item.getWebMuni());
+                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                mensaje.show();
+            }
+        });
+        recyclerViewMunicipios.setAdapter(ma);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
+
+       // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
+        //listViewMunicipios.setAdapter(arrayAdapter);
         CONSULTA_MUNICIPIOS = false;
     }
 
@@ -188,8 +210,30 @@ public class ListadoMunicipios extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        listViewMunicipios.setAdapter(arrayAdapter);
+        MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Municipio item) {
+                AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
+                mensaje.setTitle("INFO DE MUNICIPIO");
+                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
+                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                        "Nº de telefono: " + item.getWebMuni());
+                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                mensaje.show();
+            }
+        });
+        recyclerViewMunicipios.setAdapter(ma);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
+
+        // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
+        //listViewMunicipios.setAdapter(arrayAdapter);
         CONSULTA_MUNICIPIOS = false;
     }
 }
