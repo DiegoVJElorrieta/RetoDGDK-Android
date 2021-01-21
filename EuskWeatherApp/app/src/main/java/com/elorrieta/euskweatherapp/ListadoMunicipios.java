@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class ListadoMunicipios extends AppCompatActivity {
 
     private Button btnBizkaia, btnAraba, btnGipuzkoa;
-    private ListView listViewMunicipios;
     private RecyclerView recyclerViewMunicipios;
     private ArrayList<Municipio> listaMunicipios;
     private ArrayAdapter<String> arrayAdapter;
@@ -48,9 +47,6 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnBizkaia.setBackgroundColor(Color.rgb(28, 237, 253));
         btnAraba.setBackgroundColor(Color.rgb(28, 237, 253));
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
-
-
-
     }
 
     @Override
@@ -132,14 +128,16 @@ public class ListadoMunicipios extends AppCompatActivity {
                 });
                 mensaje.show();
             }
+
+            @Override
+            public void onItemClick(EspacioNatural item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
-
-        // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        //listViewMunicipios.setAdapter(arrayAdapter);
         CONSULTA_MUNICIPIOS = false;
     }
 
@@ -179,14 +177,16 @@ public class ListadoMunicipios extends AppCompatActivity {
                 });
                 mensaje.show();
             }
+
+            @Override
+            public void onItemClick(EspacioNatural item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
-
-       // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        //listViewMunicipios.setAdapter(arrayAdapter);
         CONSULTA_MUNICIPIOS = false;
     }
 
@@ -226,14 +226,16 @@ public class ListadoMunicipios extends AppCompatActivity {
                 });
                 mensaje.show();
             }
+
+            @Override
+            public void onItemClick(EspacioNatural item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMunicipios.setLayoutManager(linearLayoutManager);
-
-        // arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaMunicipios);
-        //listViewMunicipios.setAdapter(arrayAdapter);
         CONSULTA_MUNICIPIOS = false;
     }
 }

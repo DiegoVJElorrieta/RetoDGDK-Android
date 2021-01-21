@@ -2,6 +2,7 @@ package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,13 +12,14 @@ import java.util.ArrayList;
 
 public class ClientThread implements Runnable {
     private String sResultado;
-    private ArrayList<Municipio> listaMunicipios;
+    private ArrayList listado;
     private Municipio m;
+    private EspacioNatural en;
 
     public ClientThread(){}
 
-    public ClientThread(ArrayList<Municipio> listaMunicipios) {
-        this.listaMunicipios = listaMunicipios;
+    public ClientThread(ArrayList listado) {
+        this.listado = listado;
     }
 
     @Override
@@ -35,21 +37,7 @@ public class ClientThread implements Runnable {
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            if(MainActivity.INSERCION == true){
-                String sql = "SELECT * FROM municipios";
-                st = con.prepareStatement(sql);
-                rs = st.executeQuery();
-                while(rs.next()){
-                    String nomMuni = rs.getString("nombreMuni");
-                    String alcaldeMuni = rs.getString("alcalde");
-                    String webMuni = rs.getString("webMunicipio");
-                    m = new Municipio();
-                    m.setNombreMuni(nomMuni);
-                    m.setAlcaldeMuni(alcaldeMuni);
-                    m.setWebMuni(webMuni);
-                    listaMunicipios.add(m);
-                }
-            }else if(ListadoMunicipios.CONSULTA_MUNICIPIOS == true){
+            if(ListadoMunicipios.CONSULTA_MUNICIPIOS == true){
                 String sql = "SELECT * FROM municipios WHERE idProvincia=" + ListadoMunicipios.idProvincia;
                 st = con.prepareStatement(sql);
                 rs = st.executeQuery();
@@ -61,7 +49,21 @@ public class ClientThread implements Runnable {
                     m.setNombreMuni(nomMuni);
                     m.setAlcaldeMuni(alcaldeMuni);
                     m.setWebMuni(webMuni);
-                    listaMunicipios.add(m);
+                    listado.add(m);
+                }
+            } else if(ListadoEspaciosNaturales.CONSULTA_ESPACIO_NATURAL == true){
+                String sql = "SELECT * FROM espaciosnaturales WHERE tipoEspNat='Playas'";
+                st = con.prepareStatement(sql);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nomEspNat = rs.getString("nombreEspNat");
+                    String descri = rs.getString("descripcion");
+                    String tipo = rs.getString("tipoEspNat");
+                    en = new EspacioNatural();
+                    en.setNombreEspacioNat(nomEspNat);
+                    en.setDescripcion(descri);
+                    en.setTipo(tipo);
+                    listado.add(en);
                 }
             }
         } catch (ClassNotFoundException e) {
@@ -92,6 +94,6 @@ public class ClientThread implements Runnable {
     }
 
     public ArrayList getResponse() {
-        return listaMunicipios;
+        return listado;
     }
 }

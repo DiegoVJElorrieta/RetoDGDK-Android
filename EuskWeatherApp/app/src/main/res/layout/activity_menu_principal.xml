@@ -48,6 +48,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btnListaEspaciosNaturales"
+        android:onClick="listadoEspaciosNaturales"
         app:layout_constraintBottom_toTopOf="@+id/btnFavoritos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
