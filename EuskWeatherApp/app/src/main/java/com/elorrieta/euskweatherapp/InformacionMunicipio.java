@@ -2,8 +2,16 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+import java.util.Map;
 
 public class InformacionMunicipio extends AppCompatActivity {
 
@@ -25,5 +33,12 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         txtNomMunicipio.setText(extras.getString("nombre"));
         lblNomMunicipio.setText(extras.getString("info"));
+
     }
+
+    public void btnMapa(View v){
+        Intent i = new Intent(this, MapActivity.class);
+        startActivity(i);
+    }
+
 }
