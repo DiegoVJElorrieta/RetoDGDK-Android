@@ -24,12 +24,18 @@ public class HiloInsercionesModificaciones implements Runnable{
         this.contrasenia = contrasenia;
     }
 
+    public HiloInsercionesModificaciones(String nomUsu, String contrasenia){
+        this.nomUsu = nomUsu;
+        this.contrasenia = contrasenia;
+    }
+
     @Override
     public void run() {
         ResultSet rs = null;
         PreparedStatement st = null;
         Connection con = null;
         String sIP;
+        String sql;
         String sPuerto;
         String sBBDD;
         try {
@@ -39,8 +45,12 @@ public class HiloInsercionesModificaciones implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "INSERT INTO usuarios(nombreApellido, direccion, mail, nickUsuario, contrasenia) " +
-                    "VALUES('" + this.nomApe + "', '" + this.direccion + "', '" + this.mail + "', '" + this.nomUsu + "', '" + this.contrasenia + "')";
+            if(MenuPrincipal.CAMBIO_CONTRA == true){
+                sql = "UPDATE usuarios SET contrasenia='" + this.contrasenia + "' WHERE nickUsuario='" + this.nomUsu + "'";
+            } else {
+                sql = "INSERT INTO usuarios(nombreApellido, direccion, mail, nickUsuario, contrasenia) " +
+                        "VALUES('" + this.nomApe + "', '" + this.direccion + "', '" + this.mail + "', '" + this.nomUsu + "', '" + this.contrasenia + "')";
+            }
             st = con.prepareStatement(sql);
             st.executeUpdate();
         } catch (ClassNotFoundException e) {

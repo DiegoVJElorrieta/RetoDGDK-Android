@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 public class RegistroUsuario extends AppCompatActivity {
 
     private EditText txtNomApe, txtDireccion, txtCorreo, txtNomUsuario, txtContra, txtContraConfirm;
+    private TextView lblNomApe, lblDireccion, lblCorreo;
     private Button btnRegistrar;
     Bundle datos;
     private ConnectivityManager connectivityManager = null;
@@ -35,16 +37,34 @@ public class RegistroUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_registro_usuario);
 
         txtNomApe = (EditText) findViewById(R.id.txtNomApe);
-        txtDireccion = (EditText) findViewById(R.id.txtNomApe);
+        txtDireccion = (EditText) findViewById(R.id.txtDireccion);
         txtCorreo = (EditText) findViewById(R.id.txtCorreo);
         txtNomUsuario = (EditText) findViewById(R.id.txtNomUsuario);
         txtContra = (EditText) findViewById(R.id.txtContra);
         txtContraConfirm = (EditText) findViewById(R.id.txtContraConfirm);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
+        lblNomApe = (TextView) findViewById(R.id.lblNomApe);
+        lblDireccion = (TextView) findViewById(R.id.lblDireccion);
+        lblCorreo = (TextView) findViewById(R.id.lblCorreo);
 
         datos = getIntent().getExtras();
         if(datos!= null && MainActivity.EXISTE_USUARIO == false){
             txtNomUsuario.setText(datos.getString("nomUsu"));
+        } else{
+            lblNomApe.setVisibility(View.INVISIBLE);
+            txtNomApe.setVisibility(View.INVISIBLE);
+            lblDireccion.setVisibility(View.INVISIBLE);
+            txtDireccion.setVisibility(View.INVISIBLE);
+            lblCorreo.setVisibility(View.INVISIBLE);
+            txtCorreo.setVisibility(View.INVISIBLE);
+            txtNomUsuario.setText(datos.getString("usuarioCambio"));
+            btnRegistrar.setText("CAMBIAR PASSWORD");
+            btnRegistrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cambioContra(v);
+                }
+            });
         }
 
     }
@@ -92,6 +112,15 @@ public class RegistroUsuario extends AppCompatActivity {
         thread.join();
     }
 
+    private void conectar2() throws InterruptedException {
+        String usuario = txtNomUsuario.getText().toString();
+        String contrasenia = txtContra.getText().toString();
+        HiloInsercionesModificaciones hilo = new HiloInsercionesModificaciones(usuario, contrasenia);
+        Thread thread = new Thread(hilo);
+        thread.start();
+        thread.join();
+    }
+
     public boolean isConnected() {
         boolean ret = false;
         try {
@@ -130,6 +159,42 @@ public class RegistroUsuario extends AppCompatActivity {
             try {
                 if (isConnected()) {
                     conectar();
+                } else {
+                    Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {// This cannot happen!
+                Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+            }
+            AlertDialog.Builder msj = new AlertDialog.Builder(this);
+            msj.setTitle(R.string.tituloUsuCreado);
+            msj.setMessage(R.string.descriUsuCreado);
+            msj.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog mostrarMensaje = msj.create();
+            mostrarMensaje.show();
+        }
+    }
+
+    public void cambioContra(View v){
+        String usuario = txtNomUsuario.getText().toString();
+        String contrasenia = txtContra.getText().toString();
+        String contraseniaConfirm = txtContraConfirm.getText().toString();
+        if((usuario.isEmpty() == true) && (contrasenia.equals(contraseniaConfirm) == false)){
+            Toast.makeText(this, R.string.camposVaciosRegistro, Toast.LENGTH_SHORT).show();
+        } else if(contrasenia.equals(contraseniaConfirm) == false){
+            Toast.makeText(this, R.string.contrasNoCoinciden, Toast.LENGTH_SHORT).show();
+        } else if(usuario.isEmpty() == true){
+            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
+        } else if(contrasenia.isEmpty() == true || contraseniaConfirm.isEmpty() == true) {
+            Toast.makeText(this, R.string.contrasVacias, Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                if (isConnected()) {
+                    conectar2();
                 } else {
                     Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
                 }

@@ -38,7 +38,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         try {
             List<Address> address = geocoder.getFromLocationName(ListadoMunicipios.nomMapa, maxResultados);
             LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
-            mapa.addMarker(new MarkerOptions().position(oElorrieta).title("Marker Elorrieta"));
+            mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoMunicipios.nomMapa));
             mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
         } catch (IOException e) {
             e.printStackTrace();
