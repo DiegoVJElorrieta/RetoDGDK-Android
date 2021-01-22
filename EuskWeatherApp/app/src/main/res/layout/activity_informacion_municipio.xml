@@ -115,36 +115,36 @@
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintStart_toEndOf="@+id/textView11" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="52dp"
-        android:text="Clima:"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/mapView"
-        app:layout_constraintStart_toStartOf="parent" />
+ <TextView
+     android:id="@+id/textView13"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="24dp"
+     android:text="Clima:"
+     android:textSize="18dp"
+     app:layout_constraintStart_toStartOf="parent"
+     tools:layout_editor_absoluteY="407dp" />
 
-    <TextView
-        android:id="@+id/txtClima"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="52dp"
-        android:text="TextView"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/mapView"
-        app:layout_constraintStart_toEndOf="@+id/textView13" />
+ <TextView
+     android:id="@+id/txtClima"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="52dp"
+     android:layout_marginBottom="108dp"
+     android:text="TextView"
+     android:textSize="18dp"
+     app:layout_constraintBottom_toTopOf="@+id/btnMapa"
+     app:layout_constraintStart_toEndOf="@+id/textView13" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="410dp"
-        android:layout_height="204dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+ <Button
+     android:id="@+id/btnMapa"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="144dp"
+     android:text="VER EN EL MAPA"
+     android:onClick="btnMapa"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

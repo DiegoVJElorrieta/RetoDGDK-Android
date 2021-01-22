@@ -33,6 +33,7 @@ public class ListadoMunicipios extends AppCompatActivity {
     private ConnectivityManager connectivityManager = null;
     public static boolean CONSULTA_MUNICIPIOS;
     public static int idProvincia;
+    public static String nomMapa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                 mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
                         "Alcalde: " + item.getAlcaldeMuni() + "\n" +
                         "Nº de telefono: " + item.getWebMuni());
+                nomMapa = item.getNombreMuni();
                 mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

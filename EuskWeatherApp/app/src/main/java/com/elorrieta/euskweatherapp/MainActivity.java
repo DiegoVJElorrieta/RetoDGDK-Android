@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, MenuPrincipal.class);
             i.putExtra("nomUsername", txtUsuario.getText().toString());
             startActivity(i);
+        } else{
+            Toast.makeText(this, "ERROR- REVISA EL USUARIO O LA CONTRASEÑA", Toast.LENGTH_SHORT).show();
         }
     }
 
