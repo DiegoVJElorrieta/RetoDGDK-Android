@@ -123,6 +123,9 @@ public class ListadoMunicipios extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
+                        i.putExtra("nombre",item.getNombreMuni());
+                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                                "Nº de telefono: " + item.getWebMuni());
                         startActivity(i);
                     }
                 });

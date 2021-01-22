@@ -20,5 +20,10 @@ public class InformacionMunicipio extends AppCompatActivity {
         txtHumedad = (TextView) findViewById(R.id.txtHumedad);
         txtTemperatura = (TextView) findViewById(R.id.txtTemperatura);
         txtClima = (TextView) findViewById(R.id.txtClima);
+
+        Bundle extras = getIntent().getExtras();
+
+        txtNomMunicipio.setText(extras.getString("nombre"));
+        lblNomMunicipio.setText(extras.getString("info"));
     }
 }
