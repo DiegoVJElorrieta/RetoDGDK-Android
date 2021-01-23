@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCambioContra = m.findItem(R.id.itemCambioPass);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
+        MenuItem itemCamara = m.findItem(R.id.camara);
         itemCambioContra.setVisible(false);
         itemCerrarSesion.setVisible(false);
+        itemCamara.setVisible(false);
         return true;
     }
 
@@ -111,12 +113,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnLogin(View v){
-        validarRegistro(v);
+        //validarRegistro(v); /*DESCOMENTAR ESTA LINEA EN CLASE*/
         if(EXISTE_USUARIO == true){
             Intent i = new Intent(this, MenuPrincipal.class);
             i.putExtra("nomUsername", txtUsuario.getText().toString());
+            startActivity(i);/*-----------------BORRAR LO DE ABAJO EN CLASE--------------------*/
+        } else if(txtUsuario.getText().toString().equals("aaa") && txtPassword.getText().toString().equals("aaa")){
+            Intent i = new Intent(this, MenuPrincipal.class);
+            i.putExtra("nomUsername", txtUsuario.getText().toString());
             startActivity(i);
-        } else{
+            /*-------------------BORRAR HASTA AQUI---------------------*/
+        }else{
             Toast.makeText(this, "ERROR- REVISA EL USUARIO O LA CONTRASEÑA", Toast.LENGTH_SHORT).show();
         }
     }

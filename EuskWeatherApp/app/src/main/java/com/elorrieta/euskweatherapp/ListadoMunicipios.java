@@ -54,6 +54,8 @@ public class ListadoMunicipios extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu m){
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
+        MenuItem itemCamara = m.findItem(R.id.camara);
+        itemCamara.setVisible(false);
         itemCerrarSesion.setVisible(false);
         return true;
     }
@@ -100,7 +102,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
         String sRespuesta = null;
         listaMunicipios = new ArrayList<>();
-        try {
+        /*try {
             if (isConnected()) {
                 CONSULTA_MUNICIPIOS = true;
                 listaMunicipios.clear();
@@ -110,7 +112,12 @@ public class ListadoMunicipios extends AppCompatActivity {
             }
         } catch (InterruptedException e) {// This cannot happen!
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
-        }
+        }*/
+
+        //BORRAR DESDE AQUI
+        Municipio muni = new Municipio(48, 1, "Valladolid", "AlcaldePrueba", "www.muni.com");
+        listaMunicipios.add(muni);
+        //BORRAR HASTA AQUI
 
         MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
             @Override
@@ -119,9 +126,15 @@ public class ListadoMunicipios extends AppCompatActivity {
                 mensaje.setTitle("INFO DE MUNICIPIO");
                 mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
                         "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Nº de telefono: " + item.getWebMuni());
+                        "Pagina web: " + item.getWebMuni());
                 nomMapa = item.getNombreMuni();
-                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);

@@ -37,6 +37,9 @@ public class MenuPrincipal extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCambioContra = m.findItem(R.id.itemCambioPass);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
+        MenuItem itemCamara = m.findItem(R.id.camara);
+        itemCerrarSesion.setVisible(false);
+        itemCamara.setVisible(false);
         return true;
     }
 
