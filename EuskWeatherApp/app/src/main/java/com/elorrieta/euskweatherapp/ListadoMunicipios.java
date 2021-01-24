@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class ListadoMunicipios extends AppCompatActivity {
 
-    public static boolean EXISTE_FAVORITO = false;
+    public static boolean EXISTE_FAVORITO;
     private Button btnBizkaia, btnAraba, btnGipuzkoa;
     private RecyclerView recyclerViewMunicipios;
     private ArrayList<Municipio> listaMunicipios;
@@ -99,7 +99,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         btnGipuzkoa.setBackgroundColor(Color.rgb(28, 237, 253));
         String sRespuesta = null;
         listaMunicipios = new ArrayList<>();
-        /*try {
+        try {
             if (isConnected()) {
                 CONSULTA_MUNICIPIOS = true;
                 listaMunicipios.clear();
@@ -109,16 +109,19 @@ public class ListadoMunicipios extends AppCompatActivity {
             }
         } catch (InterruptedException e) {// This cannot happen!
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
-        }*/
+        }
 
+        /*
         //BORRAR DESDE AQUI
         Municipio muni = new Municipio(48, 1, "Abadiño", "AlcaldePrueba", "www.muni.com");
         listaMunicipios.add(muni);
         //BORRAR HASTA AQUI
+        */
 
         MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
             @Override
             public void onItemClick(Municipio item) {
+                EXISTE_FAVORITO = false;
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
                 mensaje.setTitle("INFO DE MUNICIPIO");
                 mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
@@ -141,6 +144,11 @@ public class ListadoMunicipios extends AppCompatActivity {
                             HiloInsertarFavoritos insertarFavoritos = new HiloInsertarFavoritos(item.getNombreMuni());
                             Thread thread2 = new Thread(insertarFavoritos);
                             thread2.start();
+                            try {
+                                thread2.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }else {
@@ -151,6 +159,11 @@ public class ListadoMunicipios extends AppCompatActivity {
                             HiloEliminarFavoritos borrarFavoritos = new HiloEliminarFavoritos(item.getNombreMuni());
                             Thread thread3 = new Thread(borrarFavoritos);
                             thread3.start();
+                            try {
+                                thread3.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }
@@ -214,15 +227,67 @@ public class ListadoMunicipios extends AppCompatActivity {
         MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
             @Override
             public void onItemClick(Municipio item) {
+                EXISTE_FAVORITO = false;
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
                 mensaje.setTitle("INFO DE MUNICIPIO");
                 mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
                         "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Nº de telefono: " + item.getWebMuni());
-                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        "Pagina web: " + item.getWebMuni());
+                nomMapa = item.getNombreMuni();
+                HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
+                Thread thread = new Thread(comprobarFavoritos);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(EXISTE_FAVORITO == false) {
+                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloInsertarFavoritos insertarFavoritos = new HiloInsertarFavoritos(item.getNombreMuni());
+                            Thread thread2 = new Thread(insertarFavoritos);
+                            thread2.start();
+                            try {
+                                thread2.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }else {
+                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloEliminarFavoritos borrarFavoritos = new HiloEliminarFavoritos(item.getNombreMuni());
+                            Thread thread3 = new Thread(borrarFavoritos);
+                            thread3.start();
+                            try {
+                                thread3.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
+                        i.putExtra("nombre",item.getNombreMuni());
+                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                                "Nº de telefono: " + item.getWebMuni());
+                        startActivity(i);
                     }
                 });
                 mensaje.show();
@@ -268,15 +333,67 @@ public class ListadoMunicipios extends AppCompatActivity {
         MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
             @Override
             public void onItemClick(Municipio item) {
+                EXISTE_FAVORITO = false;
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
                 mensaje.setTitle("INFO DE MUNICIPIO");
                 mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
                         "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Nº de telefono: " + item.getWebMuni());
-                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        "Pagina web: " + item.getWebMuni());
+                nomMapa = item.getNombreMuni();
+                HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
+                Thread thread = new Thread(comprobarFavoritos);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(EXISTE_FAVORITO == false) {
+                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloInsertarFavoritos insertarFavoritos = new HiloInsertarFavoritos(item.getNombreMuni());
+                            Thread thread2 = new Thread(insertarFavoritos);
+                            thread2.start();
+                            try {
+                                thread2.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }else {
+                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloEliminarFavoritos borrarFavoritos = new HiloEliminarFavoritos(item.getNombreMuni());
+                            Thread thread3 = new Thread(borrarFavoritos);
+                            thread3.start();
+                            try {
+                                thread3.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
+                        i.putExtra("nombre",item.getNombreMuni());
+                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
+                                "Nº de telefono: " + item.getWebMuni());
+                        startActivity(i);
                     }
                 });
                 mensaje.show();

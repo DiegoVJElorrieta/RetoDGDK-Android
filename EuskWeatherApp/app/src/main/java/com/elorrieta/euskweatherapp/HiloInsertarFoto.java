@@ -6,15 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HiloInsertarFavoritos implements Runnable {
+public class HiloInsertarFoto implements Runnable{
 
+    private String foto;
     private String nomMuni;
+    private int idUsuario;
 
-    public HiloInsertarFavoritos() {
+    public HiloInsertarFoto() {
     }
 
-    public HiloInsertarFavoritos(String nomMuni) {
-        this.nomMuni = nomMuni;
+    public HiloInsertarFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override
@@ -33,8 +35,8 @@ public class HiloInsertarFavoritos implements Runnable {
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            sql = "INSERT INTO favoritos(nomMuni) " +
-                    "VALUES('" + this.nomMuni + "')";
+            sql = "INSERT INTO favoritos " +
+                    "VALUES(1, '" + this.foto + "', 'Basauri', 1)";
 
             st = con.prepareStatement(sql);
             st.executeUpdate();

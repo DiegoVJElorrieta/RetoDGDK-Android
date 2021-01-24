@@ -2,32 +2,26 @@ package com.elorrieta.euskweatherapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,10 +29,10 @@ public class InformacionMunicipio extends AppCompatActivity {
 
     private TextView lblNomMunicipio, txtNomMunicipio, txtCoordenadas, txtHumedad, txtTemperatura, txtClima;
     private String rutaImagen;
+    private ImageView imagenCamara;
     RelativeLayout relativeLayout;
-    private Snackbar mensajePermisos;
-    private static int REQUEST_CODE_ASK_PERMISSION = 111;
-    private boolean PERMISOS_FOTOS_ALMACENAMIENTO_CONCEDIDOS, PERMISO_MAPA_CONCEDIDO;
+    private static int REQUEST_CODE_ASK_PERMISSION = 0;
+    private static String fotoString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +46,7 @@ public class InformacionMunicipio extends AppCompatActivity {
         txtHumedad = (TextView) findViewById(R.id.txtHumedad);
         txtTemperatura = (TextView) findViewById(R.id.txtTemperatura);
         txtClima = (TextView) findViewById(R.id.txtClima);
+        imagenCamara = (ImageView) findViewById(R.id.imagenCamara);
 
         Bundle extras = getIntent().getExtras();
 
@@ -79,19 +74,22 @@ public class InformacionMunicipio extends AppCompatActivity {
             mostrarMensaje.show();
         }
         if(id == R.id.camara){
-            solicitarPermisos();
-            if (PERMISOS_FOTOS_ALMACENAMIENTO_CONCEDIDOS == true) {
+            if(ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "HOLA", Toast.LENGTH_SHORT).show();
+                //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
+            } else{
                 abrirCamara();
-            } /*else{
-                mensajePermisos.make(relativeLayout, "ES NECESARIO ACEPTAR LOS PERMISOS", Snackbar.LENGTH_LONG).show();
-                mensajePermisos.setAction("ENTENDIDO", new View.OnClickListener() {
+            }
+           /*Snackbar mensajeCamara = Snackbar.make(relativeLayout, "ES NECESARIO ACEPTAR LOS PERMISOS", Snackbar.LENGTH_LONG);
+                mensajeCamara.setAction("ENTENDIDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mensajePermisos.dismiss();
+                        solicitarPermisos();
                     }
                 });
-                mensajePermisos.setActionTextColor(Color.RED);
-            }*/
+                mensajeCamara.setActionTextColor(Color.RED);
+                mensajeCamara.show();*/
+
         }
 
         return super.onOptionsItemSelected(mi);
@@ -100,12 +98,9 @@ public class InformacionMunicipio extends AppCompatActivity {
     private void solicitarUbicacion(){
         int permisoMapa = ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.ACCESS_FINE_LOCATION);
         if(permisoMapa != PackageManager.PERMISSION_GRANTED){
-            PERMISO_MAPA_CONCEDIDO = false;
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSION);
             }
-        } else {
-            PERMISO_MAPA_CONCEDIDO = true;
         }
     }
 
@@ -132,32 +127,44 @@ public class InformacionMunicipio extends AppCompatActivity {
         int permisoCamara = ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.CAMERA);
 
         if(permisoStorage != PackageManager.PERMISSION_GRANTED || permisoCamara != PackageManager.PERMISSION_GRANTED){
-            PERMISOS_FOTOS_ALMACENAMIENTO_CONCEDIDOS = false;
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
             }
-        } else{
-            PERMISOS_FOTOS_ALMACENAMIENTO_CONCEDIDOS = true;
         }
     }
 
     private void abrirCamara(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //if(i.resolveActivity(getPackageManager()) != null){
-            File imagenArchivo = null;
-
-            try{
-                imagenArchivo = crearImagen();
-            } catch(IOException e){
-                Log.e("ERROR", e.toString());
-            }
-
-            if(imagenArchivo != null){
-                Uri fotoUri = FileProvider.getUriForFile(this, "com.elorrieta.euskweatherapp.fileprovider", imagenArchivo);
-                i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
-                startActivityForResult(i, 1);
-            }
+       // File imagenArchivo = null;
+        //try{
+         //   imagenArchivo = crearImagen();
+        //} catch(IOException e){
+        //    Log.e("ERROR", e.toString());
         //}
+        //if(imagenArchivo != null){
+           // Uri fotoUri = FileProvider.getUriForFile(this, "com.elorrieta.euskweatherapp.fileprovider", imagenArchivo);
+            //i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+            startActivityForResult(i, 1);
+       // }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap imgBitMap = (Bitmap) extras.get("data");
+            imagenCamara.setImageBitmap(imgBitMap);
+            fotoString = convertirImgString(imgBitMap);
+        }
+    }
+
+    private String convertirImgString(Bitmap bitmap){
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, arrayOutputStream);
+        byte[] imagenByte = arrayOutputStream.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return imagenString;
     }
 
     private File crearImagen() throws IOException {
@@ -167,7 +174,6 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         rutaImagen = imagen.getAbsolutePath();
         return imagen;
-
     }
 
 }

@@ -30,7 +30,7 @@ public class HiloComprobarFavoritos implements Runnable {
         String sBBDD;
         try {
             Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
-            sIP = "192.168.1.34";
+            sIP = "192.168.1.83";
             sPuerto = "3306";
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -38,12 +38,14 @@ public class HiloComprobarFavoritos implements Runnable {
             String sql = "SELECT nomMuni FROM favoritos WHERE nomMuni='" + this.nombreMuni + "'";
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String nomMuni = rs.getString("nomMuni");
-                if(this.nombreMuni.equals(nomMuni)){
+                if (this.nombreMuni.equals(nomMuni)) {
                     ListadoMunicipios.EXISTE_FAVORITO = true;
                 }
             }
+
+
 
         } catch (ClassNotFoundException e) {
             Log.e("ClassNotFoundException", "");

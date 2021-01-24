@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EuskWeatherApp">
-        <activity android:name=".ListadoFavoritos"></activity>
+        <activity android:name=".InformacionEspacioNatural"></activity>
+        <activity android:name=".ListadoFavoritos" />
 
         <meta-data
             android:name="com.google.android.actions"

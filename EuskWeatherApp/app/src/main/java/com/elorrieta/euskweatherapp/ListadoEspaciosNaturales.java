@@ -48,7 +48,9 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu m){
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
+        MenuItem itemCamara = m.findItem(R.id.camara);
         itemCerrarSesion.setVisible(false);
+        itemCamara.setVisible(false);
         return true;
     }
 
@@ -116,12 +118,20 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             public void onItemClick(EspacioNatural item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
                 mensaje.setTitle("INFO DE ESPACIO NATURAL");
-                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat() + "\n" +
-                        "Tipo: " + item.getTipo());
-                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);
+                        i.putExtra("nombreEspNat", item.getNombreEspacioNat());
+                        i.putExtra("tipoEspNat", item.getTipo());
+                        startActivity(i);
                     }
                 });
                 mensaje.show();
@@ -168,12 +178,80 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             public void onItemClick(EspacioNatural item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
                 mensaje.setTitle("INFO DE ESPACIO NATURAL");
-                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat() + "\n" +
-                        "Descripcion: " + item.getDescripcion());
-                mensaje.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);
+                        i.putExtra("nombreEspNat", item.getNombreEspacioNat());
+                        i.putExtra("tipoEspNat", item.getTipo());
+                        startActivity(i);
+                    }
+                });
+                mensaje.show();
+            }
+
+            @Override
+            public void onItemClick(Favoritos item) {
+
+            }
+        });
+        recyclerViewEspaciosNaturales.setAdapter(ena);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewEspaciosNaturales.setLayoutManager(linearLayoutManager);
+        CONSULTA_ESPACIO_NATURAL = false;
+    }
+
+    public void mostrarPantanos(View v){
+        TIPO_ESPACIO = "Pantanos";
+        btnPantanos.setBackgroundColor(Color.rgb(140, 105, 178));
+        btnPlayas.setBackgroundColor(Color.rgb(28, 237, 253));
+        btnRios.setBackgroundColor(Color.rgb(28, 237, 253));
+
+        listaEspaciosNaturales = new ArrayList<>();
+        try {
+            if (isConnected()) {
+                CONSULTA_ESPACIO_NATURAL = true;
+                listaEspaciosNaturales.clear();
+                listaEspaciosNaturales = conectar();
+            } else {
+                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+            }
+        } catch (InterruptedException e) {// This cannot happen!
+            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+        }
+
+        EspacioNaturalAdapter ena = new EspacioNaturalAdapter(listaEspaciosNaturales, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Municipio item) {
+
+            }
+
+            @Override
+            public void onItemClick(EspacioNatural item) {
+                AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
+                mensaje.setTitle("INFO DE ESPACIO NATURAL");
+                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);
+                        i.putExtra("nombreEspNat", item.getNombreEspacioNat());
+                        i.putExtra("tipoEspNat", item.getTipo());
+                        startActivity(i);
                     }
                 });
                 mensaje.show();
