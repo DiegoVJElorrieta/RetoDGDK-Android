@@ -12,20 +12,17 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ListadoMunicipios extends AppCompatActivity {
 
+    public static boolean EXISTE_FAVORITO = false;
     private Button btnBizkaia, btnAraba, btnGipuzkoa;
     private RecyclerView recyclerViewMunicipios;
     private ArrayList<Municipio> listaMunicipios;
@@ -115,7 +112,7 @@ public class ListadoMunicipios extends AppCompatActivity {
         }*/
 
         //BORRAR DESDE AQUI
-        Municipio muni = new Municipio(48, 1, "Valladolid", "AlcaldePrueba", "www.muni.com");
+        Municipio muni = new Municipio(48, 1, "Abadiño", "AlcaldePrueba", "www.muni.com");
         listaMunicipios.add(muni);
         //BORRAR HASTA AQUI
 
@@ -128,6 +125,36 @@ public class ListadoMunicipios extends AppCompatActivity {
                         "Alcalde: " + item.getAlcaldeMuni() + "\n" +
                         "Pagina web: " + item.getWebMuni());
                 nomMapa = item.getNombreMuni();
+                HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
+                Thread thread = new Thread(comprobarFavoritos);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(EXISTE_FAVORITO == false) {
+                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloInsertarFavoritos insertarFavoritos = new HiloInsertarFavoritos(item.getNombreMuni());
+                            Thread thread2 = new Thread(insertarFavoritos);
+                            thread2.start();
+                        }
+                    });
+                }else {
+                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            HiloEliminarFavoritos borrarFavoritos = new HiloEliminarFavoritos(item.getNombreMuni());
+                            Thread thread3 = new Thread(borrarFavoritos);
+                            thread3.start();
+                        }
+                    });
+                }
+
                 mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -149,6 +176,11 @@ public class ListadoMunicipios extends AppCompatActivity {
 
             @Override
             public void onItemClick(EspacioNatural item) {
+
+            }
+
+            @Override
+            public void onItemClick(Favoritos item) {
 
             }
         });
@@ -200,6 +232,11 @@ public class ListadoMunicipios extends AppCompatActivity {
             public void onItemClick(EspacioNatural item) {
 
             }
+
+            @Override
+            public void onItemClick(Favoritos item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -247,6 +284,11 @@ public class ListadoMunicipios extends AppCompatActivity {
 
             @Override
             public void onItemClick(EspacioNatural item) {
+
+            }
+
+            @Override
+            public void onItemClick(Favoritos item) {
 
             }
         });

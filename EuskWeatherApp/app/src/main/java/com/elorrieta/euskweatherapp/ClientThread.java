@@ -2,7 +2,6 @@ package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +14,7 @@ public class ClientThread implements Runnable {
     private ArrayList listado;
     private Municipio m;
     private EspacioNatural en;
+    private Favoritos fav;
 
     public ClientThread(){}
 
@@ -32,7 +32,7 @@ public class ClientThread implements Runnable {
         String sBBDD;
         try {
             Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
-            sIP = "192.168.13.252";
+            sIP = "192.168.1.34";
             sPuerto = "3306";
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -64,6 +64,17 @@ public class ClientThread implements Runnable {
                     en.setDescripcion(descri);
                     en.setTipo(tipo);
                     listado.add(en);
+                }
+            } else if(ListadoFavoritos.CONSULTA_FAVORITOS == true) {
+                String sql = "select * from favoritos";
+                st = con.prepareStatement(sql);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nombreMuni = rs.getString("nomMuni");
+                    fav = new Favoritos();
+                    fav.setNombreMuni(nombreMuni);
+
+                    listado.add(fav);
                 }
             }
         } catch (ClassNotFoundException e) {

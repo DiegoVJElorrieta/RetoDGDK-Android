@@ -1,7 +1,6 @@
 package com.elorrieta.euskweatherapp;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,15 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HiloComprobarUsuario implements Runnable{
+public class HiloEliminarFavoritos implements Runnable {
 
-    private String usuario, contrasenia;
+    private String nomMuni;
 
-    public HiloComprobarUsuario(){}
-
-    public HiloComprobarUsuario(String usuario, String contrasenia){
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
+    public HiloEliminarFavoritos(String nomMuni) {
+        this.nomMuni = nomMuni;
     }
 
     @Override
@@ -26,6 +22,7 @@ public class HiloComprobarUsuario implements Runnable{
         PreparedStatement st = null;
         Connection con = null;
         String sIP;
+        String sql;
         String sPuerto;
         String sBBDD;
         try {
@@ -35,17 +32,10 @@ public class HiloComprobarUsuario implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "SELECT nickUsuario, contrasenia FROM usuarios WHERE nickUsuario='" + this.usuario + "'";
-            st = con.prepareStatement(sql);
-            rs = st.executeQuery();
-            while(rs.next()){
-                String nomUsu = rs.getString("nickUsuario");
-                String contrasenia = rs.getString("contrasenia");
-                if(this.usuario.equals(nomUsu) && this.contrasenia.equals(contrasenia)){
-                    MainActivity.EXISTE_USUARIO = true;
-                }
 
-            }
+            sql = "delete from favoritos WHERE nomMuni='" + this.nomMuni + "'";
+            st = con.prepareStatement(sql);
+            st.executeUpdate();
 
         } catch (ClassNotFoundException e) {
             Log.e("ClassNotFoundException", "");

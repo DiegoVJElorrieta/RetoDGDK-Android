@@ -78,6 +78,11 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void listadoFavoritos(View v){
+        Intent i = new Intent(this, ListadoFavoritos.class);
+        startActivity(i);
+    }
+
 
     public void cerrarSesion(View v){
         MainActivity.EXISTE_USUARIO = false;

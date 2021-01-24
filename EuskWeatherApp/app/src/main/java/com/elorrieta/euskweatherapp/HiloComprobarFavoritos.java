@@ -9,15 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HiloComprobarUsuario implements Runnable{
+public class HiloComprobarFavoritos implements Runnable {
+    private int id;
+    private String nombreMuni;
 
-    private String usuario, contrasenia;
+    public HiloComprobarFavoritos() {
+    }
 
-    public HiloComprobarUsuario(){}
-
-    public HiloComprobarUsuario(String usuario, String contrasenia){
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
+    public HiloComprobarFavoritos(String nombreMuni) {
+        this.nombreMuni = nombreMuni;
     }
 
     @Override
@@ -35,16 +35,14 @@ public class HiloComprobarUsuario implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "SELECT nickUsuario, contrasenia FROM usuarios WHERE nickUsuario='" + this.usuario + "'";
+            String sql = "SELECT nomMuni FROM favoritos WHERE nomMuni='" + this.nombreMuni + "'";
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while(rs.next()){
-                String nomUsu = rs.getString("nickUsuario");
-                String contrasenia = rs.getString("contrasenia");
-                if(this.usuario.equals(nomUsu) && this.contrasenia.equals(contrasenia)){
-                    MainActivity.EXISTE_USUARIO = true;
+                String nomMuni = rs.getString("nomMuni");
+                if(this.nombreMuni.equals(nomMuni)){
+                    ListadoMunicipios.EXISTE_FAVORITO = true;
                 }
-
             }
 
         } catch (ClassNotFoundException e) {

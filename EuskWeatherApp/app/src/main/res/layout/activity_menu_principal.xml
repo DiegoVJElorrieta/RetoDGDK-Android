@@ -58,6 +58,7 @@
         android:layout_width="255dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
+        android:onClick="listadoFavoritos"
         android:text="@string/btnMisFavoritos"
         app:layout_constraintBottom_toTopOf="@+id/btnTopListados"
         app:layout_constraintEnd_toEndOf="parent"
