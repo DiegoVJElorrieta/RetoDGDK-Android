@@ -28,11 +28,13 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
     private ConnectivityManager connectivityManager = null;
     public static boolean CONSULTA_ESPACIO_NATURAL;
     public static String TIPO_ESPACIO = "";
+    public static String nombreEspacioNatural;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_espacios_naturales);
+
 
         btnPlayas = (Button) findViewById(R.id.btnPlayas);
         btnRios = (Button) findViewById(R.id.btnRios);
@@ -119,6 +121,7 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
                 mensaje.setTitle("INFO DE ESPACIO NATURAL");
                 mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                nombreEspacioNatural = item.getNombreEspacioNat();
                 mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -179,6 +182,7 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
                 mensaje.setTitle("INFO DE ESPACIO NATURAL");
                 mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                nombreEspacioNatural = item.getNombreEspacioNat();
                 mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -239,6 +243,7 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
                 mensaje.setTitle("INFO DE ESPACIO NATURAL");
                 mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                nombreEspacioNatural = item.getNombreEspacioNat();
                 mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

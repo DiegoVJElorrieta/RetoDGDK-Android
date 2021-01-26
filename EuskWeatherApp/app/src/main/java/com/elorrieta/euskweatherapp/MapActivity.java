@@ -36,10 +36,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         Geocoder geocoder = new Geocoder(this);
         int maxResultados = 1;
         try {
-            List<Address> address = geocoder.getFromLocationName(ListadoMunicipios.nomMapa, maxResultados);
-            LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
-            mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoMunicipios.nomMapa));
-            mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
+            if(ListadoMunicipios.nomMapa != null){
+                List<Address> address = geocoder.getFromLocationName(ListadoMunicipios.nomMapa, maxResultados);
+                LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+                mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoMunicipios.nomMapa));
+                mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
+                ListadoMunicipios.nomMapa = null;
+            } else if (ListadoEspaciosNaturales.nombreEspacioNatural != null){
+                List<Address> address = geocoder.getFromLocationName(ListadoEspaciosNaturales.nombreEspacioNatural, maxResultados);
+                LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+                mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoEspaciosNaturales.nombreEspacioNatural));
+                mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
+                ListadoEspaciosNaturales.nombreEspacioNatural = null;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -74,9 +74,13 @@ public class InformacionEspacioNatural extends AppCompatActivity {
         return super.onOptionsItemSelected(mi);
     }
 
-    public void btnMapa(View v){
-        Intent i = new Intent(this, MapActivity.class);
-        startActivity(i);
+    public void btnMapaEspNat(View v){
+        if(ActivityCompat.checkSelfPermission(InformacionEspacioNatural.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSION);
+        } else{
+            Intent i = new Intent(this, MapActivity.class);
+            startActivity(i);
+        }
     }
 
     private void abrirCamara(){

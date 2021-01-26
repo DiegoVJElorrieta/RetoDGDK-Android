@@ -33,21 +33,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="52dp"
-        android:text="RIOS"
         android:onClick="mostrarRios"
+        android:text="RIOS"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPantanos"
-        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toEndOf="@+id/btnPlayas" />
 
     <Button
         android:id="@+id/btnPantanos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="36dp"
         android:layout_marginBottom="52dp"
-        android:text="PANTANOS"
         android:onClick="mostrarPantanos"
+        android:text="PANTANOS"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnRios" />
 </androidx.constraintlayout.widget.ConstraintLayout>

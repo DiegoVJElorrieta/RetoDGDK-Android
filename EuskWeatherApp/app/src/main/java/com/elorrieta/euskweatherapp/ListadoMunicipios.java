@@ -111,13 +111,6 @@ public class ListadoMunicipios extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
 
-        /*
-        //BORRAR DESDE AQUI
-        Municipio muni = new Municipio(48, 1, "Abadiño", "AlcaldePrueba", "www.muni.com");
-        listaMunicipios.add(muni);
-        //BORRAR HASTA AQUI
-        */
-
         MunicipioAdapter ma = new MunicipioAdapter(listaMunicipios, new OnItemClickListener() {
             @Override
             public void onItemClick(Municipio item) {
@@ -180,7 +173,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
                         i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Nº de telefono: " + item.getWebMuni());
+                                "Pagina web: " + item.getWebMuni());
                         startActivity(i);
                     }
                 });
@@ -286,7 +279,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
                         i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Nº de telefono: " + item.getWebMuni());
+                                "Pagina web: " + item.getWebMuni());
                         startActivity(i);
                     }
                 });
@@ -392,7 +385,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
                         i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Nº de telefono: " + item.getWebMuni());
+                                "Pagina web: " + item.getWebMuni());
                         startActivity(i);
                     }
                 });

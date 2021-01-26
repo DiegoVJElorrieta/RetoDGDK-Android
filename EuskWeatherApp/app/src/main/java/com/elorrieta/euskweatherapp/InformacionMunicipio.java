@@ -28,7 +28,11 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class InformacionMunicipio extends AppCompatActivity {
 
@@ -38,6 +42,9 @@ public class InformacionMunicipio extends AppCompatActivity {
     RelativeLayout relativeLayout;
     private static int REQUEST_CODE_ASK_PERMISSION = 0;
     public static String fotoString;
+    public static Date fecha;
+    public static double presionAtm;
+    public static int temperatura, saturacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,24 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         txtNomMunicipio.setText(extras.getString("nombre"));
         lblNomMunicipio.setText(extras.getString("info"));
+
+       /*HiloConsultarInfoMeteo hiloConsultarInfoMeteo = new HiloConsultarInfoMeteo(txtNomMunicipio.getText().toString());
+        Thread threadInfoMeteo = new Thread(hiloConsultarInfoMeteo);
+        threadInfoMeteo.start();
+        try {
+            threadInfoMeteo.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        fecha = (Date) Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String strDate = dateFormat.format(fecha);
+        txtHumedad.setText(strDate);
+        txtCoordenadas.setText(Double.toString(presionAtm));
+        txtTemperatura.setText(Integer.toString(temperatura));
+        txtClima.setText(Integer.toString(saturacion));*/
+
 
         HiloCargarFoto hiloCargarFoto = new HiloCargarFoto(txtNomMunicipio.getText().toString());
         Thread thread = new Thread(hiloCargarFoto);
@@ -119,17 +144,7 @@ public class InformacionMunicipio extends AppCompatActivity {
 
     private void abrirCamara(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-       // File imagenArchivo = null;
-        //try{
-         //   imagenArchivo = crearImagen();
-        //} catch(IOException e){
-        //    Log.e("ERROR", e.toString());
-        //}
-        //if(imagenArchivo != null){
-           // Uri fotoUri = FileProvider.getUriForFile(this, "com.elorrieta.euskweatherapp.fileprovider", imagenArchivo);
-            //i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
-            startActivityForResult(i, 1);
-       // }
+        startActivityForResult(i, 1);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

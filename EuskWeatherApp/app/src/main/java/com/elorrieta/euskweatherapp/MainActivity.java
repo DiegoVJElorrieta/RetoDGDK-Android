@@ -136,24 +136,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*public void validarRegistro2(View v){
-        String usuario = txtUsuario.getText().toString();
-        usuarioApp = usuario;
-        String password = txtPassword.getText().toString();
-        SharedPreferences users = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
-        String user = users.getString(usuario, "");
-        if(user.length() == 0){
-            Toast.makeText(this, R.string.usuarioNoValido, Toast.LENGTH_LONG).show();
-            EXISTE_USUARIO = false;
-        } else{
-            if(password.equals(user)){
-                Toast.makeText(this, R.string.inicioSesionCorrecto, Toast.LENGTH_LONG).show();
-                EXISTE_USUARIO = true;
-            } else{
-                Toast.makeText(this, R.string.contraIncorrecta, Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
 
     private void conectar() throws InterruptedException {
         String usuario = txtUsuario.getText().toString();
@@ -191,37 +173,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
         }
     }
-
-    /*private void conectar() throws InterruptedException {
-        HiloInsercionesModificaciones hilo = new HiloInsercionesModificaciones();
-        Thread thread = new Thread(hilo);
-        thread.start();
-        thread.join();
-    }
-
-    public boolean isConnected() {
-        boolean ret = false;
-        try {
-            connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if ((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected()))
-                ret = true;
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
-        }
-        return ret;
-    }
-
-    public void ingresarUsuario(View v){
-        try {
-            if (isConnected()) {
-                conectar();
-            } else {
-                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {// This cannot happen!
-            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
-        }
-    }*/
 
 }

@@ -69,37 +69,6 @@ public class RegistroUsuario extends AppCompatActivity {
 
     }
 
-    /*public void registrarUsuario(View v){
-        String usuario = txtNomUsuario.getText().toString();
-        String contrasenia = txtContra.getText().toString();
-        String contraseniaConfirm = txtContraConfirm.getText().toString();
-        SharedPreferences users = getSharedPreferences("usuarios", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = users.edit();
-        if((usuario.isEmpty() == true) && (contrasenia.equals(contraseniaConfirm) == false)){
-            Toast.makeText(this, R.string.camposVaciosRegistro, Toast.LENGTH_SHORT).show();
-        } else if(contrasenia.equals(contraseniaConfirm) == false){
-            Toast.makeText(this, R.string.contrasNoCoinciden, Toast.LENGTH_SHORT).show();
-        } else if(usuario.isEmpty() == true){
-            Toast.makeText(this, R.string.nomUsuarioVacio, Toast.LENGTH_SHORT).show();
-        } else if(contrasenia.isEmpty() == true || contraseniaConfirm.isEmpty() == true) {
-            Toast.makeText(this, R.string.contrasVacias, Toast.LENGTH_SHORT).show();
-        } else{
-            editor.putString(usuario, contrasenia);
-            editor.commit();
-            AlertDialog.Builder msj = new AlertDialog.Builder(this);
-            msj.setTitle(R.string.tituloUsuCreado);
-            msj.setMessage(R.string.descriUsuCreado);
-            msj.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            AlertDialog mostrarMensaje = msj.create();
-            mostrarMensaje.show();
-        }
-    }*/
-
     private void conectar() throws InterruptedException {
         String nomApellidos = txtNomApe.getText().toString();
         String direccion = txtDireccion.getText().toString();
