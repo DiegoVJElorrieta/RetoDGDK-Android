@@ -1,0 +1,58 @@
+<resources>
+
+    <!--MAIN ACTIVITY-->
+    <string name="app_name">EuskWeatherApp</string>
+    <string name="tituloAcercaDe">Acerca de...</string>
+    <string name="descriAcercaDe">App desarrollada por EuskWeather Group</string>
+    <string name="usuarioExiste">¡EL USUARIO YA EXISTE!</string>
+    <string name="usuarioNoValido">INICIO NO VALIDO, EL USUARIO NO EXISTE</string>
+    <string name="inicioSesionCorrecto">INICIO DE SESION EXITOSO</string>
+    <string name="contraIncorrecta">CONTRASEÑA INCORRECTA</string>
+    <string name="hintUsuario">Usuario</string>
+    <string name="lblUsuario">Usuario:</string>
+    <string name="hintContrasenia">Contraseña</string>
+    <string name="lblContrasenia">Contraseña:</string>
+    <string name="btnLogin">LOGIN</string>
+    <string name="btnRegistro">REGISTRATE</string>
+
+    <!--MENU PRINCIPAL-->
+    <string name="salirMenu">ES NECESARIO CERRAR SESION</string>
+    <string name="cierreSesionCorrecto">SESION CERRADA CORRECTAMENTE</string>
+    <string name="lblBienvenido">Bienvenido</string>
+    <string name="lblPregunta">¿Qué desea hacer?</string>
+    <string name="btnListaMunicipios">LISTA DE MUNICIPIOS</string>
+    <string name="btnListaEspaciosNaturales">LISTA DE ESPACIOS NATURALES</string>
+    <string name="btnMisFavoritos">MIS FAVORITOS</string>
+    <string name="btnTopListados">TOP LISTADOS</string>
+    <string name="btnCerrarSesion">CERRAR SESION</string>
+
+    <!--REGISTRO USUARIOS-->
+    <string name="camposVaciosRegistro">DEBES RELLENAR TODOS LOS CAMPOS</string>
+    <string name="contrasNoCoinciden">LAS CONTRASEÑAS NO COINCIDEN</string>
+    <string name="nomUsuarioVacio">DEBES ESTABLECER UN NOMBRE DE USUARIO</string>
+    <string name="contrasVacias">DEBES ESTABLECER UNA CONTRASEÑA</string>
+    <string name="tituloUsuCreado">USUARIO CREADO</string>
+    <string name="descriUsuCreado">Pulse ok para regresar a inicio.</string>
+    <string name="lblNomApellidos">Nombre y apellidos:</string>
+    <string name="hintNomApellidos">Nombre y apellidos</string>
+    <string name="lblDireccion">Direccion:</string>
+    <string name="hintDireccion">Direccion</string>
+    <string name="lblCorreoElectronico">Correo electrónico:</string>
+    <string name="hintCorreoElectronico">Correo electrónico</string>
+    <string name="lblNomUsuario">Nombre de usuario:</string>
+    <string name="hintNomUsuario">Nombre de usuario</string>
+    <string name="lblContra">Contraseña:</string>
+    <string name="lblContraConfirm">Confirmar contraseña:</string>
+
+    <!--LISTADO MUNICIPIOS-->
+    <string name="tituloMenuContextual">Pulsa sobre la opcion deseada</string>
+
+    <!--MENU CONTEXTUAL LISTADOS-->
+    <string name="opcInfo">Información</string>
+    <string name="opcAgregarImg">Agregar imagen</string>
+
+    <!--MENU OPCIONES-->
+    <string name="opcAcercaDe">Acerca de...</string>
+    <string name="opcCambioContra">Cambiar contraseña</string>
+
+</resources>
