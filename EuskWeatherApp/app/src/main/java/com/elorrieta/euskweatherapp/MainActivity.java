@@ -113,16 +113,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnLogin(View v){
-        //validarRegistro(v); /*DESCOMENTAR ESTA LINEA EN CLASE*/
+        validarRegistro(v); /*DESCOMENTAR ESTA LINEA EN CLASE*/
         if(EXISTE_USUARIO == true){
             Intent i = new Intent(this, MenuPrincipal.class);
             i.putExtra("nomUsername", txtUsuario.getText().toString());
-            startActivity(i);/*-----------------BORRAR LO DE ABAJO EN CLASE--------------------*/
-        } else if(txtUsuario.getText().toString().equals("aaa") && txtPassword.getText().toString().equals("aaa")){
-            Intent i = new Intent(this, MenuPrincipal.class);
-            i.putExtra("nomUsername", txtUsuario.getText().toString());
             startActivity(i);
-            /*-------------------BORRAR HASTA AQUI---------------------*/
         }else{
             Toast.makeText(this, "ERROR- REVISA EL USUARIO O LA CONTRASEÑA", Toast.LENGTH_SHORT).show();
         }

@@ -1,18 +1,19 @@
 package com.elorrieta.euskweatherapp;
 
-import android.util.Log;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HiloEliminarFavoritos implements Runnable {
+public class HiloCargarFoto extends Thread{
 
     private String nomMuni;
 
-    public HiloEliminarFavoritos(String nomMuni) {
+    public HiloCargarFoto() {
+    }
+
+    public HiloCargarFoto(String nomMuni) {
         this.nomMuni = nomMuni;
     }
 
@@ -32,36 +33,18 @@ public class HiloEliminarFavoritos implements Runnable {
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-
-            sql = "delete from favoritos WHERE nomMuni='" + this.nomMuni + "'";
+            sql = "SELECT fotoString FROM fotos WHERE nombreMunicipio = '" + this.nomMuni + "'";
             st = con.prepareStatement(sql);
-            st.executeUpdate();
-
-        } catch (ClassNotFoundException e) {
-            Log.e("ClassNotFoundException", "");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            Log.e("SQLException", "");
-            e.printStackTrace();
-        } catch (Exception e) {
-            Log.e("Exception", "");
-            e.printStackTrace();
-        } finally {// Intentamos cerrar _todo.
-            try {// Cerrar ResultSet
-                if (rs != null) {
-                    rs.close();
-                }// Cerrar PreparedStatement
-                if (st != null) {
-                    st.close();
-                }// Cerrar Connection
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception e) {
-                Log.e("Exception_cerrando todo", "");
-                e.printStackTrace();
+            rs = st.executeQuery();
+            String fotoCod = "";
+            while(rs.next()){
+                fotoCod = rs.getString("fotoString");
             }
+            InformacionMunicipio.fotoString = fotoCod;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
-
 }

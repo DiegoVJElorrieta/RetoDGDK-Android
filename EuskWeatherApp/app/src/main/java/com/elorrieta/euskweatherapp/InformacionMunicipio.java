@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InformacionMunicipio extends AppCompatActivity {
 
@@ -32,7 +37,7 @@ public class InformacionMunicipio extends AppCompatActivity {
     private ImageView imagenCamara;
     RelativeLayout relativeLayout;
     private static int REQUEST_CODE_ASK_PERMISSION = 0;
-    private static String fotoString;
+    public static String fotoString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,23 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         txtNomMunicipio.setText(extras.getString("nombre"));
         lblNomMunicipio.setText(extras.getString("info"));
+
+        HiloCargarFoto hiloCargarFoto = new HiloCargarFoto(txtNomMunicipio.getText().toString());
+        Thread thread = new Thread(hiloCargarFoto);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            byte[] decodedString = Base64.decode(fotoString, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imagenCamara.setImageBitmap(decodedByte);
+        } catch(Exception e){
+
+        }
 
     }
 
@@ -75,63 +97,25 @@ public class InformacionMunicipio extends AppCompatActivity {
         }
         if(id == R.id.camara){
             if(ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "HOLA", Toast.LENGTH_SHORT).show();
-                //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_PERMISSION);
             } else{
                 abrirCamara();
             }
-           /*Snackbar mensajeCamara = Snackbar.make(relativeLayout, "ES NECESARIO ACEPTAR LOS PERMISOS", Snackbar.LENGTH_LONG);
-                mensajeCamara.setAction("ENTENDIDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        solicitarPermisos();
-                    }
-                });
-                mensajeCamara.setActionTextColor(Color.RED);
-                mensajeCamara.show();*/
-
         }
 
         return super.onOptionsItemSelected(mi);
     }
 
-    private void solicitarUbicacion(){
-        int permisoMapa = ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permisoMapa != PackageManager.PERMISSION_GRANTED){
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSION);
-            }
-        }
-    }
-
     public void btnMapa(View v){
-        //solicitarUbicacion();
-        //if(PERMISO_MAPA_CONCEDIDO == true){
+        if(ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSION);
+        } else{
             Intent i = new Intent(this, MapActivity.class);
             startActivity(i);
-        /*} else{
-            mensajePermisos.make(relativeLayout, "ES NECESARIO PERMITIR LA UBICACION", Snackbar.LENGTH_LONG).show();
-            mensajePermisos.setAction("ENTENDIDO", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mensajePermisos.dismiss();
-                }
-            });
-            mensajePermisos.setActionTextColor(Color.RED);
-        }*/
-
-    }
-
-    private void solicitarPermisos(){
-        int permisoStorage = ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int permisoCamara = ActivityCompat.checkSelfPermission(InformacionMunicipio.this, Manifest.permission.CAMERA);
-
-        if(permisoStorage != PackageManager.PERMISSION_GRANTED || permisoCamara != PackageManager.PERMISSION_GRANTED){
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_CODE_ASK_PERMISSION);
-            }
         }
+
     }
+
 
     private void abrirCamara(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -155,12 +139,20 @@ public class InformacionMunicipio extends AppCompatActivity {
             Bitmap imgBitMap = (Bitmap) extras.get("data");
             imagenCamara.setImageBitmap(imgBitMap);
             fotoString = convertirImgString(imgBitMap);
+            HiloInsertarFoto hiloInsertarFoto = new HiloInsertarFoto(fotoString, txtNomMunicipio.getText().toString());
+            Thread thread = new Thread(hiloInsertarFoto);
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private String convertirImgString(Bitmap bitmap){
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, arrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, arrayOutputStream);
         byte[] imagenByte = arrayOutputStream.toByteArray();
         String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
 

@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="410dp"
-        android:layout_height="129dp"
+        android:layout_width="407dp"
+        android:layout_height="83dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -160,10 +160,10 @@
 
     <ImageView
         android:id="@+id/imagenCamara"
-        android:layout_width="144dp"
-        android:layout_height="133dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="144dp"
+        android:layout_width="188dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
