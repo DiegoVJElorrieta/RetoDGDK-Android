@@ -60,6 +60,11 @@ public class ListadoFavoritos extends AppCompatActivity {
             public void onItemClick(Favoritos item) {
 
             }
+
+            @Override
+            public void onItemClick(Foto item) {
+
+            }
         });
         recyclerViewFavoritos.setAdapter(fav);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

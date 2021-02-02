@@ -7,15 +7,6 @@
     android:background="#FFFFFF"
     tools:context=".InformacionMunicipio">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="407dp"
-        android:layout_height="83dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></RelativeLayout>
-
     <TextView
         android:id="@+id/lblNomMunicipio"
         android:layout_width="wrap_content"
@@ -160,22 +151,33 @@
 
     <ImageView
         android:id="@+id/imagenCamara"
-        android:layout_width="188dp"
-        android:layout_height="179dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="96dp"
+        android:layout_width="222dp"
+        android:layout_height="218dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="36dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/logo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFotos"
-        android:layout_width="203dp"
-        android:layout_height="194dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="93dp"
+        android:layout_height="213dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/lblVistaPrevia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="IMAGEN SELECCIONADA"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/imagenCamara"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

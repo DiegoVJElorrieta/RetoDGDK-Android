@@ -43,11 +43,11 @@ public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.MiViewHolder>{
         byte[] decodedString = Base64.decode(f.getFotoString(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         holder.foto.setImageBitmap(decodedByte);
-        holder.separadorFoto.setText("-----------------------------------");
+        holder.separadorFoto.setText("-------------");
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //listener.onItemClick(f);
+                listener.onItemClick(f);
             }
         });
     }

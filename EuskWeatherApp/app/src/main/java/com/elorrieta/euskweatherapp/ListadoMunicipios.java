@@ -189,6 +189,11 @@ public class ListadoMunicipios extends AppCompatActivity {
             public void onItemClick(Favoritos item) {
 
             }
+
+            @Override
+            public void onItemClick(Foto item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -295,6 +300,11 @@ public class ListadoMunicipios extends AppCompatActivity {
             public void onItemClick(Favoritos item) {
 
             }
+
+            @Override
+            public void onItemClick(Foto item) {
+
+            }
         });
         recyclerViewMunicipios.setAdapter(ma);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -399,6 +409,11 @@ public class ListadoMunicipios extends AppCompatActivity {
 
             @Override
             public void onItemClick(Favoritos item) {
+
+            }
+
+            @Override
+            public void onItemClick(Foto item) {
 
             }
         });

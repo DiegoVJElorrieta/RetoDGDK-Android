@@ -57,7 +57,6 @@ public class InformacionMunicipio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_municipio);
 
-        relativeLayout = findViewById(R.id.relativeLayout);
         lblNomMunicipio = (TextView) findViewById(R.id.lblNomMunicipio);
         txtNomMunicipio = (TextView) findViewById(R.id.txtNomMunicipio);
         txtCoordenadas = (TextView) findViewById(R.id.txtCoordenadas);
@@ -66,7 +65,7 @@ public class InformacionMunicipio extends AppCompatActivity {
         txtClima = (TextView) findViewById(R.id.txtClima);
         imagenCamara = (ImageView) findViewById(R.id.imagenCamara);
         recyclerViewFoto = (RecyclerView) findViewById(R.id.recyclerViewFotos);
-
+        imagenCamara.setImageResource(R.drawable.logo);
         Bundle extras = getIntent().getExtras();
 
         txtNomMunicipio.setText(extras.getString("nombre"));
@@ -97,14 +96,6 @@ public class InformacionMunicipio extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try {
-            byte[] decodedString = Base64.decode(fotoString, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            imagenCamara.setImageBitmap(decodedByte);
-        } catch(Exception e){
-
-        }
-
         FotoAdapter fa = new FotoAdapter(fotos, new OnItemClickListener() {
             @Override
             public void onItemClick(Municipio item) {
@@ -119,6 +110,14 @@ public class InformacionMunicipio extends AppCompatActivity {
             @Override
             public void onItemClick(Favoritos item) {
 
+            }
+
+            @Override
+            public void onItemClick(Foto item) {
+                fotoString = item.getFotoString();
+                byte[] decodedString = Base64.decode(fotoString, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                imagenCamara.setImageBitmap(decodedByte);
             }
         });
         recyclerViewFoto.setAdapter(fa);

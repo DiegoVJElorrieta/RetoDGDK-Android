@@ -144,6 +144,11 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             public void onItemClick(Favoritos item) {
 
             }
+
+            @Override
+            public void onItemClick(Foto item) {
+
+            }
         });
         recyclerViewEspaciosNaturales.setAdapter(ena);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -205,6 +210,11 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             public void onItemClick(Favoritos item) {
 
             }
+
+            @Override
+            public void onItemClick(Foto item) {
+
+            }
         });
         recyclerViewEspaciosNaturales.setAdapter(ena);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -264,6 +274,11 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
 
             @Override
             public void onItemClick(Favoritos item) {
+
+            }
+
+            @Override
+            public void onItemClick(Foto item) {
 
             }
         });
