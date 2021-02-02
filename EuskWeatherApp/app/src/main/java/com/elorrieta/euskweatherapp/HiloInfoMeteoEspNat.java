@@ -1,5 +1,7 @@
 package com.elorrieta.euskweatherapp;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,17 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class HiloCargarFoto extends Thread{
+public class HiloInfoMeteoEspNat implements Runnable{
 
     private String nomMuni;
-    private Foto foto;
-    private ArrayList<Foto> lista;
+    private ArrayList listaInfoMetEsp;
+    private InformacionMeteorologica infMeteo;
 
-    public HiloCargarFoto() {
+    public HiloInfoMeteoEspNat(){
+
     }
 
-    public HiloCargarFoto(ArrayList<Foto> lista, String nomMuni) {
-        this.lista = lista;
+    public HiloInfoMeteoEspNat(ArrayList listaInfoMetEsp, String nomMuni){
+        this.listaInfoMetEsp = listaInfoMetEsp;
         this.nomMuni = nomMuni;
     }
 
@@ -38,23 +41,28 @@ public class HiloCargarFoto extends Thread{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            sql = "SELECT * FROM fotos WHERE nombreMunicipio = '" + this.nomMuni + "'";
+            sql = "SELECT * FROM informacionmeteorologica where nomEstMet in " +
+                    "(select nombreEstacion from estacionmeteorologica where nomMunicipio in " +
+                    "(select nomMunicipio from espaciosnaturales where nombreEspNat ='" + this.nomMuni + "'))";
+
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
-            String fotoCod = "", nomMunicipio ="";
             while(rs.next()){
-                fotoCod = rs.getString("fotoString");
-                nomMunicipio = rs.getString("nombreMunicipio");
-               foto = new Foto();
-                foto.setFotoString(fotoCod);
-                foto.setNombreMunicipio(nomMunicipio);
-                lista.add(foto);
+                String temperatura = rs.getString("temperatura");
+                String calidadAire = rs.getString("calidadAire");
+                //Log.e("TEMPERATURA", "TEMP " + this.nomMuni + " :" + temperatura);
+                if(temperatura != null && calidadAire != null) {
+                    infMeteo = new InformacionMeteorologica();
+                    infMeteo.setTemperatura(temperatura);
+                    infMeteo.setCalidadAire(calidadAire);
+                    listaInfoMetEsp.add(infMeteo);
+                }
             }
-            InformacionMunicipio.fotoString = fotoCod;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
 }

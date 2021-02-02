@@ -51,6 +51,7 @@ public class InformacionMunicipio extends AppCompatActivity {
     public static int saturacion;
     private RecyclerView recyclerViewFoto;
     private ArrayList<Foto> fotos;
+    private ArrayList<InformacionMeteorologica> listaInfoMeteo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,8 @@ public class InformacionMunicipio extends AppCompatActivity {
         txtNomMunicipio.setText(extras.getString("nombre"));
         lblNomMunicipio.setText(extras.getString("info"));
 
-        HiloInformacionMeteo hiloInformacionMeteo = new HiloInformacionMeteo(txtNomMunicipio.getText().toString());
+        listaInfoMeteo = new ArrayList<>();
+        HiloInformacionMeteo hiloInformacionMeteo = new HiloInformacionMeteo(listaInfoMeteo, txtNomMunicipio.getText().toString());
         Thread hiloInfo = new Thread(hiloInformacionMeteo);
         hiloInfo.start();
         try {
@@ -80,11 +82,17 @@ public class InformacionMunicipio extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        txtCoordenadas.setText(presionAtm + " atm");
-        txtHumedad.setText(fecha);
-        txtTemperatura.setText(temperatura + "ºC");
-        txtClima.setText(saturacion + "%");
+        if(listaInfoMeteo.isEmpty()){
+            txtCoordenadas.setText("INFO NO DISPONIBLE");
+            txtHumedad.setText("INFO NO DISPONIBLE");
+            txtTemperatura.setText("INFO NO DISPONIBLE");
+            txtClima.setText("INFO NO DISPONIBLE");
+        }else {
+            txtCoordenadas.setText(listaInfoMeteo.get(0).getPresionAtm() + " atm");
+            txtHumedad.setText(listaInfoMeteo.get(0).getFecha());
+            txtTemperatura.setText(listaInfoMeteo.get(0).getTemperatura() + "ºC");
+            txtClima.setText(listaInfoMeteo.get(0).getSaturacionO2() + "%");
+        }
 
         fotos = new ArrayList<>();
         HiloCargarFoto hiloCargarFoto = new HiloCargarFoto(fotos, txtNomMunicipio.getText().toString());

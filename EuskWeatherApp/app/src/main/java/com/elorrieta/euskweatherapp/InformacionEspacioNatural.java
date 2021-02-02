@@ -20,13 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class InformacionEspacioNatural extends AppCompatActivity {
 
-    private TextView lblNomEspNat, lblTipo;
+    private TextView lblNomEspNat, lblTipo, txtTemperaturaEsp, txtCalidadAire;
     private ImageView imagenCamara;
     private static int REQUEST_CODE_ASK_PERMISSION = 0;
     private  String fotoString;
+    private ArrayList<InformacionMeteorologica> listadoInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,31 @@ public class InformacionEspacioNatural extends AppCompatActivity {
         lblNomEspNat = (TextView) findViewById(R.id.txtNomEspNat);
         lblTipo = (TextView) findViewById(R.id.lblTipoEspNat);
         imagenCamara = (ImageView) findViewById(R.id.imgEspNat);
+        txtTemperaturaEsp = (TextView) findViewById(R.id.txtTempEsp);
+        txtCalidadAire = (TextView) findViewById(R.id.txtCalidadAire);
 
         Bundle extras = getIntent().getExtras();
 
         lblNomEspNat.setText(extras.getString("nombreEspNat"));
-        lblTipo.setText(extras.getString("tipoEspNat").substring(0, 5));
+        lblTipo.setText(extras.getString("tipoEspNat"));
+
+        listadoInfo = new ArrayList<>();
+        HiloInfoMeteoEspNat hiloInfoMeteoEspNat = new HiloInfoMeteoEspNat(listadoInfo, lblNomEspNat.getText().toString());
+        Thread thread = new Thread(hiloInfoMeteoEspNat);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(listadoInfo.isEmpty()){
+            txtTemperaturaEsp.setText("INFO NO DISPONIBLE");
+            txtCalidadAire.setText("INFO NO DISPONIBLE");
+        } else{
+            txtTemperaturaEsp.setText(listadoInfo.get(0).getTemperatura() + "ºC");
+            txtCalidadAire.setText(listadoInfo.get(0).getCalidadAire());
+        }
 
     }
 
