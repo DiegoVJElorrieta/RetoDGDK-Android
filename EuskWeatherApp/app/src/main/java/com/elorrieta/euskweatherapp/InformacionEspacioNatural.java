@@ -71,6 +71,9 @@ public class InformacionEspacioNatural extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menuopciones, m);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
         MenuItem itemCamara = m.findItem(R.id.camara);
+        MenuItem itemCompartir = m.findItem(R.id.compartir);
+        itemCompartir.setVisible(false);
+        itemCamara.setVisible(false);
         return true;
     }
 

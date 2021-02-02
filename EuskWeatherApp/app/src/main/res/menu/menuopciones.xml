@@ -3,10 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/compartir"
+        android:icon="@mipmap/compartir"
+        android:title="compartir"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/camara"
         android:icon="@mipmap/camara"
         android:title="camara"
         app:showAsAction="always" />
+
     <item
         android:id="@+id/itemAcercaDe"
         android:title="@string/opcAcercaDe" />

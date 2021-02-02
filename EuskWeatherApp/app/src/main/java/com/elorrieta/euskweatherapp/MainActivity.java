@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         MenuItem itemCambioContra = m.findItem(R.id.itemCambioPass);
         MenuItem itemCerrarSesion = m.findItem(R.id.itemCerrarSesion);
         MenuItem itemCamara = m.findItem(R.id.camara);
+        MenuItem itemCompartir = m.findItem(R.id.compartir);
+        itemCompartir.setVisible(false);
         itemCambioContra.setVisible(false);
         itemCerrarSesion.setVisible(false);
         itemCamara.setVisible(false);

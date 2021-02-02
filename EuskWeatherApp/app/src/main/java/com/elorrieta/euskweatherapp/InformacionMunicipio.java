@@ -3,6 +3,7 @@ package com.elorrieta.euskweatherapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,12 +13,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +33,8 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -160,6 +166,15 @@ public class InformacionMunicipio extends AppCompatActivity {
                 abrirCamara();
             }
         }
+        if(id == R.id.compartir){
+            try {
+                BitmapDrawable drawable = (BitmapDrawable) imagenCamara.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                compartirFoto(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return super.onOptionsItemSelected(mi);
     }
@@ -214,6 +229,38 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         rutaImagen = imagen.getAbsolutePath();
         return imagen;
+    }
+
+    private void compartir() throws IOException {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        String aux = "Mira la foto que encontre de " + txtNomMunicipio.getText().toString() + ":\n";
+        i.putExtra(Intent.EXTRA_TEXT, aux);
+
+        startActivity(i);
+    }
+
+    private void compartirFoto(Bitmap bitmap) throws IOException {
+        String aux = "Mira la foto que encontre de " + txtNomMunicipio.getText().toString();
+        File cachePath = new File(this.getCacheDir(), "imageview");
+        cachePath.mkdirs();
+        FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        stream.close();
+
+        File imagePath = new File(this.getCacheDir(), "imageview");
+        File newFile = new File(imagePath, "image.png");
+        Uri contentUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileprovider", newFile);
+        if(contentUri != null){
+            Intent shareIntent = new Intent();
+            shareIntent.putExtra(Intent.EXTRA_TEXT, aux);
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
+            shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            shareIntent.setType("image/png");
+            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+        }
     }
 
 }
