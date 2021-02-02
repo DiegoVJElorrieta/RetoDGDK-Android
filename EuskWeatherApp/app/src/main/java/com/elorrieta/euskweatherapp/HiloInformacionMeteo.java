@@ -18,7 +18,8 @@ public class HiloInformacionMeteo implements Runnable{
 
     public HiloInformacionMeteo(){}
 
-    public HiloInformacionMeteo(String nombre){
+    public HiloInformacionMeteo(ArrayList listado, String nombre){
+        this.listado = listado;
         this.nombre = nombre;
     }
 
@@ -32,7 +33,8 @@ public class HiloInformacionMeteo implements Runnable{
         String sBBDD;
         try {
             Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
-            sIP = "192.168.1.34";
+
+            sIP = "192.168.13.252";
             sPuerto = "3306";
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -41,10 +43,18 @@ public class HiloInformacionMeteo implements Runnable{
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while(rs.next()){
-               InformacionMunicipio.presionAtm = rs.getString("presionAtm");
-                InformacionMunicipio.temperatura = rs.getString("temperatura");
-                InformacionMunicipio.saturacion = rs.getInt("saturacionO2");
-                InformacionMunicipio.calidadAire = rs.getString("calidadAire");
+               String presionAtm = rs.getString("presionAtm");
+               String temperatura = rs.getString("temperatura");
+               int saturacionO2 = rs.getInt("saturacionO2");
+               String calidadAire = rs.getString("calidadAire");
+               if(presionAtm != null) {
+                   infMeteo = new InformacionMeteorologica();
+                   infMeteo.setPresionAtm(presionAtm);
+                   infMeteo.setTemperatura(temperatura);
+                   infMeteo.setSaturacionO2(saturacionO2);
+                   infMeteo.setCalidadAire(calidadAire);
+                   listado.add(infMeteo);
+               }
             }
 
         } catch (ClassNotFoundException e) {
