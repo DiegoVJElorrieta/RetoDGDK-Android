@@ -114,8 +114,8 @@ public class InformacionMunicipio extends AppCompatActivity {
 
             @Override
             public void onItemClick(Foto item) {
-                fotoString = item.getFotoString();
-                byte[] decodedString = Base64.decode(fotoString, Base64.DEFAULT);
+                String codFoto = item.getFotoString();
+                byte[] decodedString = Base64.decode(codFoto, Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imagenCamara.setImageBitmap(decodedByte);
             }
@@ -177,7 +177,7 @@ public class InformacionMunicipio extends AppCompatActivity {
         if(requestCode == 1 && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap imgBitMap = (Bitmap) extras.get("data");
-            imagenCamara.setImageBitmap(imgBitMap);
+            //imagenCamara.setImageBitmap(imgBitMap);
             fotoString = convertirImgString(imgBitMap);
             HiloInsertarFoto hiloInsertarFoto = new HiloInsertarFoto(fotoString, txtNomMunicipio.getText().toString());
             Thread thread = new Thread(hiloInsertarFoto);
