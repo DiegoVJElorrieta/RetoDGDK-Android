@@ -70,6 +70,7 @@
         android:layout_width="255dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
+        android:onClick="Top"
         android:text="@string/btnTopListados"
         app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"

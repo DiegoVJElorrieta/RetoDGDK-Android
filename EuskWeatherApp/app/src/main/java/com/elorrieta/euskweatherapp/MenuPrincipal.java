@@ -82,6 +82,10 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent i = new Intent(this, ListadoFavoritos.class);
         startActivity(i);
     }
+    public void Top(View v){
+        Intent i = new Intent(this, TopProvincias.class);
+        startActivity(i);
+    }
 
 
     public void cerrarSesion(View v){

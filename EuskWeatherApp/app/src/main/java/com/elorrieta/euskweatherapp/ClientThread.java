@@ -15,6 +15,9 @@ public class ClientThread implements Runnable {
     private Municipio m;
     private EspacioNatural en;
     private Favoritos fav;
+    private TopSaturO2 topO2;
+    private TopPresionATM topATM;
+    private TopTemperatura topTemp;
 
     public ClientThread(){}
 
@@ -32,7 +35,7 @@ public class ClientThread implements Runnable {
         String sBBDD;
         try {
             Class.forName("com.mysql.jdbc.Driver");//Aqui pondriamos la IP y puerto.//sIP = "192.168.2.91";
-            sIP = "192.168.13.252";
+            sIP = "192.168.1.34";
             sPuerto = "3306";
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
@@ -75,6 +78,54 @@ public class ClientThread implements Runnable {
                     fav.setNombreMuni(nombreMuni);
 
                     listado.add(fav);
+                }
+            } else if(TopProvincias.Consulta_Saturacion == true) {
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.saturacionO2 FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion order by i.saturacionO2 DESC LIMIT 5";
+                st = con.prepareStatement(sql);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nombreProv = rs.getString("nombreProv");
+                    String nombreMuni = rs.getString("nombreMuni");
+                    String satur = rs.getString("saturacionO2");
+
+                    topO2 = new TopSaturO2();
+                    topO2.setNomProv(nombreProv);
+                    topO2.setNomMuni(nombreMuni);
+                    topO2.setSaturO2(satur);
+
+                    listado.add(topO2);
+                }
+            }else if(TopProvincias.Consulta_Presion == true) {
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.presionAtm FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion order by i.presionAtm ASC LIMIT 5";
+                st = con.prepareStatement(sql);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nombreProv = rs.getString("nombreProv");
+                    String nombreMuni = rs.getString("nombreMuni");
+                    String presion = rs.getString("presionAtm");
+
+                    topATM = new TopPresionATM();
+                    topATM.setNomProv(nombreProv);
+                    topATM.setNomMuni(nombreMuni);
+                    topATM.setPresion(presion);
+
+                    listado.add(topATM);
+                }
+            }else if(TopProvincias.Consulta_Temperatura == true) {
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.temperatura FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion WHERE i.temperatura <> 'Datos no disponibles' order by i.temperatura DESC LIMIT 5";
+                st = con.prepareStatement(sql);
+                rs = st.executeQuery();
+                while(rs.next()){
+                    String nombreProv = rs.getString("nombreProv");
+                    String nombreMuni = rs.getString("nombreMuni");
+                    String temperatura = rs.getString("temperatura");
+
+                    topTemp = new TopTemperatura();
+                    topTemp.setNomProv(nombreProv);
+                    topTemp.setNomMuni(nombreMuni);
+                    topTemp.setTemperatura(temperatura);
+
+                    listado.add(topTemp);
                 }
             }
         } catch (ClassNotFoundException e) {
