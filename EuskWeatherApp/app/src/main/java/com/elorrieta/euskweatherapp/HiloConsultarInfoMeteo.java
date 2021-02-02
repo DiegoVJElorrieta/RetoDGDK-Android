@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class HiloConsultarInfoMeteo implements Runnable{
 
-    private Date fechaInfo;
+    private String fechaInfo;
     private double presionAtm;
     private int temperatura;
     private int saturacionO2;
@@ -39,14 +39,12 @@ public class HiloConsultarInfoMeteo implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "SELECT fechaInfo, presionAtm, temperatura, saturacionO2 FROM usuarios WHERE nomEstMet='Urkiola'";
+            String sql = "SELECT fechaInfo, presionAtm, temperatura, saturacionO2 FROM informacionmeteorologica WHERE nomEstMet='" + this.nombre + "'";
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while(rs.next()){
-                InformacionMunicipio.fecha = rs.getDate("fechaInfo");
-                InformacionMunicipio.presionAtm = rs.getDouble("presionAtm");
-                InformacionMunicipio.temperatura = rs.getInt("temperatura");
-                InformacionMunicipio.saturacion = rs.getInt("saturacionO2");
+
+
             }
 
         } catch (ClassNotFoundException e) {

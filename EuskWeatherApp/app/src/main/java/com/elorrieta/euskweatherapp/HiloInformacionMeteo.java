@@ -1,5 +1,6 @@
 package com.elorrieta.euskweatherapp;
 
+import android.icu.text.IDNA;
 import android.util.Log;
 
 import java.sql.Connection;
@@ -13,11 +14,12 @@ public class HiloInformacionMeteo implements Runnable{
 
     private ArrayList listado;
     private InformacionMeteorologica infMeteo;
+    private String nombre;
 
     public HiloInformacionMeteo(){}
 
-    public HiloInformacionMeteo(ArrayList listado){
-        this.listado = listado;
+    public HiloInformacionMeteo(String nombre){
+        this.nombre = nombre;
     }
 
     @Override
@@ -35,20 +37,14 @@ public class HiloInformacionMeteo implements Runnable{
             sBBDD = "euskweather";
             String url = "jdbc:mysql://" + sIP + ":" + sPuerto + "/" + sBBDD + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, "root", "");// Consulta sencilla en este caso.
-            String sql = "SELECT * FROM informacionMeteorologica";
+            String sql = "SELECT * FROM informacionMeteorologica WHERE nomEstMet in (select nombreEstacion from estacionMeteorologica where nomMunicipio='" + this.nombre + "')";
             st = con.prepareStatement(sql);
             rs = st.executeQuery();
             while(rs.next()){
-                String presionAtm = rs.getString("presionAtm");
-                String temperatura = rs.getString("temperatura");
-                int satO2 = rs.getInt("saturacionO2");
-                String calidadAire = rs.getString("calidadAire");
-                infMeteo= new InformacionMeteorologica();
-                infMeteo.setPresionAtm(presionAtm);
-                infMeteo.setTemperatura(temperatura);
-                infMeteo.setSaturacionO2(satO2);
-                infMeteo.setCalidadAire(calidadAire);
-                listado.add(infMeteo);
+               InformacionMunicipio.presionAtm = rs.getString("presionAtm");
+                InformacionMunicipio.temperatura = rs.getString("temperatura");
+                InformacionMunicipio.saturacion = rs.getInt("saturacionO2");
+                InformacionMunicipio.calidadAire = rs.getString("calidadAire");
             }
 
         } catch (ClassNotFoundException e) {

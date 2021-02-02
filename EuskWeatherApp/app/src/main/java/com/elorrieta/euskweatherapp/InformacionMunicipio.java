@@ -3,6 +3,8 @@ package com.elorrieta.euskweatherapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
@@ -42,9 +44,13 @@ public class InformacionMunicipio extends AppCompatActivity {
     RelativeLayout relativeLayout;
     private static int REQUEST_CODE_ASK_PERMISSION = 0;
     public static String fotoString;
-    public static Date fecha;
-    public static double presionAtm;
-    public static int temperatura, saturacion;
+    public static String calidadAire;
+    public static String presionAtm;
+    public static String temperatura;
+    public static String fecha;
+    public static int saturacion;
+    private RecyclerView recyclerViewFoto;
+    private ArrayList<Foto> fotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +65,30 @@ public class InformacionMunicipio extends AppCompatActivity {
         txtTemperatura = (TextView) findViewById(R.id.txtTemperatura);
         txtClima = (TextView) findViewById(R.id.txtClima);
         imagenCamara = (ImageView) findViewById(R.id.imagenCamara);
+        recyclerViewFoto = (RecyclerView) findViewById(R.id.recyclerViewFotos);
 
         Bundle extras = getIntent().getExtras();
 
         txtNomMunicipio.setText(extras.getString("nombre"));
         lblNomMunicipio.setText(extras.getString("info"));
 
-       /*HiloConsultarInfoMeteo hiloConsultarInfoMeteo = new HiloConsultarInfoMeteo(txtNomMunicipio.getText().toString());
-        Thread threadInfoMeteo = new Thread(hiloConsultarInfoMeteo);
-        threadInfoMeteo.start();
+        HiloInformacionMeteo hiloInformacionMeteo = new HiloInformacionMeteo(txtNomMunicipio.getText().toString());
+        Thread hiloInfo = new Thread(hiloInformacionMeteo);
+        hiloInfo.start();
         try {
-            threadInfoMeteo.join();
+            hiloInfo.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        fecha = (Date) Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        String strDate = dateFormat.format(fecha);
-        txtHumedad.setText(strDate);
-        txtCoordenadas.setText(Double.toString(presionAtm));
-        txtTemperatura.setText(Integer.toString(temperatura));
-        txtClima.setText(Integer.toString(saturacion));*/
 
+        txtCoordenadas.setText(presionAtm + " atm");
+        txtHumedad.setText(fecha);
+        txtTemperatura.setText(temperatura + "ºC");
+        txtClima.setText(saturacion + "%");
 
-        HiloCargarFoto hiloCargarFoto = new HiloCargarFoto(txtNomMunicipio.getText().toString());
+        fotos = new ArrayList<>();
+        HiloCargarFoto hiloCargarFoto = new HiloCargarFoto(fotos, txtNomMunicipio.getText().toString());
         Thread thread = new Thread(hiloCargarFoto);
         thread.start();
         try {
@@ -99,6 +104,27 @@ public class InformacionMunicipio extends AppCompatActivity {
         } catch(Exception e){
 
         }
+
+        FotoAdapter fa = new FotoAdapter(fotos, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Municipio item) {
+
+            }
+
+            @Override
+            public void onItemClick(EspacioNatural item) {
+
+            }
+
+            @Override
+            public void onItemClick(Favoritos item) {
+
+            }
+        });
+        recyclerViewFoto.setAdapter(fa);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewFoto.setLayoutManager(linearLayoutManager);
 
     }
 
