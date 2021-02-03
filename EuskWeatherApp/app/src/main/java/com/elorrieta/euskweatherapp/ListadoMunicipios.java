@@ -17,7 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ListadoMunicipios extends AppCompatActivity {
@@ -117,11 +121,12 @@ public class ListadoMunicipios extends AppCompatActivity {
             @Override
             public void onItemClick(Municipio item) {
                 EXISTE_FAVORITO = false;
+                TextView nomMuni = findViewById(R.id.nomMuni);
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
-                mensaje.setTitle("INFO DE MUNICIPIO");
-                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
-                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Pagina web: " + item.getWebMuni());
+                mensaje.setTitle(R.string.alertTituloInfoMuni);
+                mensaje.setMessage(getString(R.string.nombreMuniAdap) + item.getNombreMuni() + "\n" +
+                        getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                        getString(R.string.webMuniAdap) + item.getWebMuni());
                 nomMapa = item.getNombreMuni();
                 HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
                 Thread thread = new Thread(comprobarFavoritos);
@@ -132,7 +137,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(EXISTE_FAVORITO == false) {
-                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.aniadirFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -147,7 +152,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         }
                     });
                 }else {
-                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.quitarFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -163,19 +168,19 @@ public class ListadoMunicipios extends AppCompatActivity {
                     });
                 }
 
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
-                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Pagina web: " + item.getWebMuni());
+                        i.putExtra("info",getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                                getString(R.string.webMuniAdap) + item.getWebMuni());
                         startActivity(i);
                     }
                 });
@@ -229,10 +234,10 @@ public class ListadoMunicipios extends AppCompatActivity {
             public void onItemClick(Municipio item) {
                 EXISTE_FAVORITO = false;
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
-                mensaje.setTitle("INFO DE MUNICIPIO");
-                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
-                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Pagina web: " + item.getWebMuni());
+                mensaje.setTitle(R.string.alertTituloInfoMuni);
+                mensaje.setMessage(getString(R.string.nombreMuniAdap) + item.getNombreMuni() + "\n" +
+                        getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                        getString(R.string.webMuniAdap) + item.getWebMuni());
                 nomMapa = item.getNombreMuni();
                 HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
                 Thread thread = new Thread(comprobarFavoritos);
@@ -243,7 +248,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(EXISTE_FAVORITO == false) {
-                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.aniadirFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -258,7 +263,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         }
                     });
                 }else {
-                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.quitarFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -274,19 +279,19 @@ public class ListadoMunicipios extends AppCompatActivity {
                     });
                 }
 
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
-                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Pagina web: " + item.getWebMuni());
+                        i.putExtra("info",getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                                getString(R.string.webMuniAdap) + item.getWebMuni());
                         startActivity(i);
                     }
                 });
@@ -340,10 +345,10 @@ public class ListadoMunicipios extends AppCompatActivity {
             public void onItemClick(Municipio item) {
                 EXISTE_FAVORITO = false;
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoMunicipios.this);
-                mensaje.setTitle("INFO DE MUNICIPIO");
-                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
-                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Pagina web: " + item.getWebMuni());
+                mensaje.setTitle(R.string.alertTituloInfoMuni);
+                mensaje.setMessage(getString(R.string.nombreMuniAdap) + item.getNombreMuni() + "\n" +
+                        getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                        getString(R.string.webMuniAdap) + item.getWebMuni());
                 nomMapa = item.getNombreMuni();
                 HiloComprobarFavoritos comprobarFavoritos = new HiloComprobarFavoritos(item.getNombreMuni());
                 Thread thread = new Thread(comprobarFavoritos);
@@ -354,7 +359,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(EXISTE_FAVORITO == false) {
-                    mensaje.setNeutralButton("AÑADIR A FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.aniadirFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -369,7 +374,7 @@ public class ListadoMunicipios extends AppCompatActivity {
                         }
                     });
                 }else {
-                    mensaje.setNeutralButton("ELIMINAR DE FAVORITOS", new DialogInterface.OnClickListener() {
+                    mensaje.setNeutralButton(R.string.quitarFavorito, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -385,19 +390,19 @@ public class ListadoMunicipios extends AppCompatActivity {
                     });
                 }
 
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MAS INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionMunicipio.class);
                         i.putExtra("nombre",item.getNombreMuni());
-                        i.putExtra("info","Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                                "Pagina web: " + item.getWebMuni());
+                        i.putExtra("info",getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                                getString(R.string.webMuniAdap) + item.getWebMuni());
                         startActivity(i);
                     }
                 });

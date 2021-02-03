@@ -1,0 +1,98 @@
+<resources>
+
+    <!--MAIN ACTIVITY-->
+    <string name="app_name">EuskWeatherApp</string>
+    <string name="tituloAcercaDe">About...</string>
+    <string name="descriAcercaDe">App developed by the EuskWeather Group</string>
+    <string name="usuarioExiste">THE USER ALREADY EXISTS!</string>
+    <string name="usuarioNoValido">WRONG LOGIN, THE USER DOESNT EXIST</string>
+    <string name="inicioSesionCorrecto">LOGIN SUCCESFULL</string>
+    <string name="contraIncorrecta">WRONG PASSWORD</string>
+    <string name="hintUsuario">User</string>
+    <string name="lblUsuario">User:</string>
+    <string name="hintContrasenia">Password</string>
+    <string name="lblContrasenia">Password:</string>
+    <string name="btnLogin">LOGIN</string>
+    <string name="btnRegistro">REGISTER</string>
+    <string name="errorLogin">ERROR - PLEASE CHECK IF THE FIELDS ARE OKEY</string>
+    <string name="errorComunicacion">ERROR_COMUNICATION</string>
+    <string name="errorGeneral">ERROR_GENERAL</string>
+
+    <!--MENU PRINCIPAL-->
+    <string name="salirMenu">YOU MUST LOG OUT</string>
+    <string name="cierreSesionCorrecto">YOU HAVE LOG OUT</string>
+    <string name="lblBienvenido">Welcome</string>
+    <string name="lblPregunta">What do you want to do?</string>
+    <string name="btnListaMunicipios">MUNICIPALITY LIST</string>
+    <string name="btnListaEspaciosNaturales">NATURAL ENVIROMENTS LIST</string>
+    <string name="btnMisFavoritos">MY FAVOURITES</string>
+    <string name="btnTopListados">TOPS</string>
+    <string name="btnCerrarSesion">LOG OUT</string>
+
+    <!--REGISTRO USUARIOS-->
+    <string name="camposVaciosRegistro">YOU MUST FILL ALL THE FIELD</string>
+    <string name="contrasNoCoinciden">THE PASSWORD ARE NOT EQUALS</string>
+    <string name="nomUsuarioVacio">YOU MUST DEFINE AN USERNAME</string>
+    <string name="contrasVacias">YOU MUST DEFINE A PASSWORD</string>
+    <string name="tituloUsuCreado">USER CREATED</string>
+    <string name="descriUsuCreado">Press ok to return.</string>
+    <string name="lblNomApellidos">Name and surname:</string>
+    <string name="hintNomApellidos">Name and surname</string>
+    <string name="lblDireccion">Address:</string>
+    <string name="hintDireccion">Address</string>
+    <string name="lblCorreoElectronico">Email:</string>
+    <string name="hintCorreoElectronico">Email</string>
+    <string name="lblNomUsuario">Username:</string>
+    <string name="hintNomUsuario">Username</string>
+    <string name="lblContra">Password:</string>
+    <string name="lblContraConfirm">Confirm password:</string>
+
+    <!--LISTADO MUNICIPIOS-->
+    <string name="tituloMenuContextual">Press an option</string>
+
+    <!--MENU CONTEXTUAL LISTADOS-->
+    <string name="opcInfo">Information</string>
+    <string name="opcAgregarImg">Add image</string>
+
+    <!--MUNICIPIOS-->
+    <string name="nombreMuniAdap">"Municipality Name: "</string>
+    <string name="alcaldeMuniAdap">"Major name: "</string>
+    <string name="webMuniAdap">"Webpage: "</string>
+    <string name="alertTituloInfoMuni">MUNICIPALITY INFO:</string>
+    <string name="aniadirFavorito">ADD TO FAVOURITES</string>
+    <string name="quitarFavorito">DELETE FROM FAVOURITES</string>
+    <string name="masInfo">MORE INFORMATION</string>
+    <string name="cerrarAlert">CLOSE</string>
+
+    <!--MENU OPCIONES-->
+    <string name="opcAcercaDe">About...</string>
+    <string name="opcCambioContra">Change password</string>
+
+    <!--ESPACIO NATURAL ADAPTER-->
+    <string name="nomEspacioAdap">"Name: "</string>
+    <string name="descriEspacioAdap">"Description: "</string>
+    <string name="tipoEspacioAdap">"Type: "</string>
+    <string name="alertTituloEspNat">NATURAL ENVIROMENT INFO</string>
+
+    <!--ACTIVITIES-->
+    <string name="lblNombre">"Name: "</string>
+    <string name="lblTipo">"Type: "</string>
+    <string name="lblTemperatura">"Temperature: "</string>
+    <string name="lblCalidadAire">"Air quality: "</string>
+    <string name="btnVerMapa">FIND IN THE MAP</string>
+    <string name="lblInfo">"Information of: "</string>
+    <string name="lblPresionAtm">"Atm pressure: "</string>
+    <string name="lblFecha">"Date: "</string>
+    <string name="lblSaturacion">"O2 Saturation: "</string>
+    <string name="lblImagenSelec">SELECTED IMAGE</string>
+    <string name="btnPlaya">BEACHES</string>
+    <string name="btnRios">RIVERS</string>
+    <string name="btnPantanos">SWAMPS</string>
+    <string name="registrarUsu">REGISTER</string>
+    <string name="topSaturacion">The highest O2 Saturation</string>
+    <string name="topPresionAtm">Lower Atm Pressure</string>
+    <string name="topTemperaturas">Highest temperatures</string>
+    <string name="infoNoDisponible">INFO NOT AVAILABLE</string>
+    <string name="msjCompartirFoto">"Look this photo of "</string>
+
+</resources>

@@ -8,18 +8,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nomEspNat"
+        android:text="@string/nomEspacioAdap"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/descripcionEspNat"
+        android:text="@string/descriEspacioAdap"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tipoEspNat"
+        android:text="@string/tipoEspacioAdap"
         android:textStyle="bold"/>
 
     <TextView

@@ -57,8 +57,8 @@ public class InformacionEspacioNatural extends AppCompatActivity {
         }
 
         if(listadoInfo.isEmpty()){
-            txtTemperaturaEsp.setText("INFO NO DISPONIBLE");
-            txtCalidadAire.setText("INFO NO DISPONIBLE");
+            txtTemperaturaEsp.setText(R.string.infoNoDisponible);
+            txtCalidadAire.setText(R.string.infoNoDisponible);
         } else{
             txtTemperaturaEsp.setText(listadoInfo.get(0).getTemperatura() + "ºC");
             txtCalidadAire.setText(listadoInfo.get(0).getCalidadAire());

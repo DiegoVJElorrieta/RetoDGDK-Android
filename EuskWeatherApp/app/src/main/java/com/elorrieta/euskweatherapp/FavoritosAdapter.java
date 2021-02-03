@@ -35,7 +35,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.MiVi
     @Override
     public void onBindViewHolder(FavoritosAdapter.MiViewHolder holder, int position) {
         Favoritos fav = favoritosList.get(position);
-        holder.nombreMuni.setText("Nombre municipio: " + fav.getNombreMuni());
+        holder.nombreMuni.setText(holder.nombreMuni.getText() + fav.getNombreMuni());
         holder.separador.setText("-----------------------------------");
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

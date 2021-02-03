@@ -8,17 +8,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nomMuni"
+        android:text="@string/nombreMuniAdap"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/alcaldeMuni"/>
+        android:id="@+id/alcaldeMuni"
+        android:text="@string/alcaldeMuniAdap"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/webMuni"
+        android:text="@string/webMuniAdap"
         android:textStyle="bold"/>
 
     <TextView

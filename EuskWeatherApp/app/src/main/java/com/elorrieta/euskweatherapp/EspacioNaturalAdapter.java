@@ -41,10 +41,9 @@ public class EspacioNaturalAdapter extends RecyclerView.Adapter<EspacioNaturalAd
     @Override
     public void onBindViewHolder(EspacioNaturalAdapter.MiViewHolder holder, int position) {
         EspacioNatural en = espacioNaturalList.get(position);
-        String nombre = "Nombre: ";
-        holder.nombreEspNat.setText(R.string.nomEspacioAdap + en.getNombreEspacioNat());
-        holder.descripcion.setText("Descripcion: " + en.getDescripcion());
-        holder.tipo.setText("Tipo: " + en.getTipo());
+        holder.nombreEspNat.setText(holder.nombreEspNat.getText() + en.getNombreEspacioNat());
+        holder.descripcion.setText(holder.descripcion.getText() + en.getDescripcion());
+        holder.tipo.setText(holder.tipo.getText() + en.getTipo());
         holder.separador.setText("-----------------------------------");
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

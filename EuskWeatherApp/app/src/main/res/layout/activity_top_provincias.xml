@@ -8,20 +8,22 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="175dp"
-        android:layout_height="48dp"
+        android:layout_width="163dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTop"
-        android:layout_width="407dp"
-        android:layout_height="0dp"
+        android:layout_width="365dp"
+        android:layout_height="443dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.384" />
 
     <RadioGroup
         android:id="@+id/radioGroup"

@@ -46,7 +46,7 @@ create table Usuarios
     mail varchar(50) not null, nickUsuario varchar(40) not null, contrasenia varchar(40) not null);
     
 create table Fotos
-	(fotoString text not null, nombreMunicipio varchar(40) not null
+	(fotoString text not null, nombreMunicipio varchar(40) not null,
     constraint fk_nombreMunicipio_2 foreign key(nombreMunicipio) references Municipios(nombreMuni) on update cascade on delete cascade);
 
 create table favoritos

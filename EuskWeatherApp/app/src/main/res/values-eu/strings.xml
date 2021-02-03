@@ -2,10 +2,10 @@
 
     <!--MAIN ACTIVITY-->
     <string name="app_name">EuskWeatherApp</string>
-    <string name="tituloAcercaDe">Acerca de...</string>
-    <string name="descriAcercaDe">App desarrollada por EuskWeather Group</string>
-    <string name="usuarioExiste">¡EL USUARIO YA EXISTE!</string>
-    <string name="usuarioNoValido">INICIO NO VALIDO, EL USUARIO NO EXISTE</string>
+    <string name="tituloAcercaDe">Honi buruz...</string>
+    <string name="descriAcercaDe">App eginda EuskWeather Group taldeagarik</string>
+    <string name="usuarioExiste">"ERABILTZAILEA EXISTITZEN DA "</string>
+    <string name="usuarioNoValido">ERABILTZAILE HAU EZ DAGO DATUBASEAN</string>
     <string name="inicioSesionCorrecto">INICIO DE SESION EXITOSO</string>
     <string name="contraIncorrecta">CONTRASEÑA INCORRECTA</string>
     <string name="hintUsuario">Usuario</string>

@@ -45,10 +45,10 @@ public class ListadoFavoritos extends AppCompatActivity {
             @Override
             public void onItemClick(Municipio item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoFavoritos.this);
-                mensaje.setTitle("INFO DE MUNICIPIO");
-                mensaje.setMessage("Nombre: " + item.getNombreMuni() + "\n" +
-                        "Alcalde: " + item.getAlcaldeMuni() + "\n" +
-                        "Pagina web: " + item.getWebMuni());
+                mensaje.setTitle(R.string.alertTituloInfoMuni);
+                mensaje.setMessage(getString(R.string.nombreMuniAdap) + item.getNombreMuni() + "\n" +
+                        getString(R.string.alcaldeMuniAdap) + item.getAlcaldeMuni() + "\n" +
+                        getString(R.string.webMuniAdap) + item.getWebMuni());
             }
 
             @Override

@@ -121,16 +121,16 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             @Override
             public void onItemClick(EspacioNatural item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
-                mensaje.setTitle("INFO DE ESPACIO NATURAL");
-                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setTitle(R.string.alertTituloEspNat);
+                mensaje.setMessage(getString(R.string.nomEspacioAdap) + item.getNombreEspacioNat());
                 nombreEspacioNatural = item.getNombreEspacioNat();
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);
@@ -187,16 +187,16 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             @Override
             public void onItemClick(EspacioNatural item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
-                mensaje.setTitle("INFO DE ESPACIO NATURAL");
-                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setTitle(R.string.alertTituloEspNat);
+                mensaje.setMessage(getString(R.string.nomEspacioAdap) + item.getNombreEspacioNat());
                 nombreEspacioNatural = item.getNombreEspacioNat();
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);
@@ -253,16 +253,16 @@ public class ListadoEspaciosNaturales extends AppCompatActivity {
             @Override
             public void onItemClick(EspacioNatural item) {
                 AlertDialog.Builder mensaje = new AlertDialog.Builder(ListadoEspaciosNaturales.this);
-                mensaje.setTitle("INFO DE ESPACIO NATURAL");
-                mensaje.setMessage("Nombre: " + item.getNombreEspacioNat());
+                mensaje.setTitle(R.string.alertTituloEspNat);
+                mensaje.setMessage(getString(R.string.nomEspacioAdap) + item.getNombreEspacioNat());
                 nombreEspacioNatural = item.getNombreEspacioNat();
-                mensaje.setNegativeButton("CERRAR", new DialogInterface.OnClickListener() {
+                mensaje.setNegativeButton(R.string.cerrarAlert, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
-                mensaje.setPositiveButton("MOSTRAR INFORMACION", new DialogInterface.OnClickListener() {
+                mensaje.setPositiveButton(R.string.masInfo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(getApplicationContext(), InformacionEspacioNatural.class);

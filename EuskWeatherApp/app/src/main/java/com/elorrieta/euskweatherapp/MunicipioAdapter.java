@@ -39,9 +39,9 @@ public class MunicipioAdapter extends RecyclerView.Adapter<MunicipioAdapter.MiVi
     @Override
     public void onBindViewHolder(MiViewHolder holder, int position) {
         Municipio m = municipioList.get(position);
-        holder.nombreMuni.setText("Nombre municipio: " + m.getNombreMuni());
-        holder.alcaldeMuni.setText("Alcalde: " + m.getAlcaldeMuni());
-        holder.webMuni.setText("Web municipio: " + m.getWebMuni());
+        holder.nombreMuni.setText(holder.nombreMuni.getText() + m.getNombreMuni());
+        holder.alcaldeMuni.setText(holder.alcaldeMuni.getText() + m.getAlcaldeMuni());
+        holder.webMuni.setText(holder.webMuni.getText() + m.getWebMuni());
         holder.separador.setText("-----------------------------------");
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

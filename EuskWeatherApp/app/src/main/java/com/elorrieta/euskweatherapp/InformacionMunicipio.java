@@ -67,7 +67,6 @@ public class InformacionMunicipio extends AppCompatActivity {
         lblNomMunicipio = (TextView) findViewById(R.id.lblNomMunicipio);
         txtNomMunicipio = (TextView) findViewById(R.id.txtNomMunicipio);
         txtCoordenadas = (TextView) findViewById(R.id.txtCoordenadas);
-        txtHumedad = (TextView) findViewById(R.id.txtHumedad);
         txtTemperatura = (TextView) findViewById(R.id.txtTemperatura);
         txtClima = (TextView) findViewById(R.id.txtClima);
         imagenCamara = (ImageView) findViewById(R.id.imagenCamara);
@@ -90,12 +89,12 @@ public class InformacionMunicipio extends AppCompatActivity {
 
         if(listaInfoMeteo.isEmpty()){
             txtCoordenadas.setText(R.string.infoNoDisponible);
-            txtHumedad.setText(R.string.infoNoDisponible);
+            //txtHumedad.setText(R.string.infoNoDisponible);
             txtTemperatura.setText(R.string.infoNoDisponible);
             txtClima.setText(R.string.infoNoDisponible);
         }else {
             txtCoordenadas.setText(listaInfoMeteo.get(0).getPresionAtm() + " atm");
-            txtHumedad.setText(listaInfoMeteo.get(0).getFecha());
+           // txtHumedad.setText(listaInfoMeteo.get(0).getFecha());
             txtTemperatura.setText(listaInfoMeteo.get(0).getTemperatura() + "ºC");
             txtClima.setText(listaInfoMeteo.get(0).getSaturacionO2() + "%");
         }
@@ -241,7 +240,7 @@ public class InformacionMunicipio extends AppCompatActivity {
     }
 
     private void compartirFoto(Bitmap bitmap) throws IOException {
-        String aux = R.string.msjCompartirFoto + txtNomMunicipio.getText().toString();
+        String aux = getString(R.string.msjCompartirFoto) + " " + txtNomMunicipio.getText().toString();
         File cachePath = new File(this.getCacheDir(), "imageview");
         cachePath.mkdirs();
         FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
