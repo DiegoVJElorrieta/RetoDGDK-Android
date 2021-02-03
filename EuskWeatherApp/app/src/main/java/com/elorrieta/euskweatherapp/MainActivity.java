@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("nomUsername", txtUsuario.getText().toString());
             startActivity(i);
         }else{
-            Toast.makeText(this, "ERROR- REVISA EL USUARIO O LA CONTRASEÑA", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.errorLogin, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             if ((networkInfo != null) && (networkInfo.isAvailable()) && (networkInfo.isConnected()))
                 ret = true;
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error_comunicación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.errorComunicacion, Toast.LENGTH_SHORT).show();
         }
         return ret;
     }
@@ -169,10 +169,10 @@ public class MainActivity extends AppCompatActivity {
             if (isConnected()) {
                 conectar();
             } else {
-                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.errorComunicacion, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {// This cannot happen!
-            Toast.makeText(getApplicationContext(), "ERROR_GENERAL", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.errorGeneral, Toast.LENGTH_SHORT).show();
         }
     }
 

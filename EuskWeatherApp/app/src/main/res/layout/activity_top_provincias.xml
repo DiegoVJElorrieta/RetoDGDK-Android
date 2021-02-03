@@ -28,20 +28,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="saturacionO2"
-            android:text="Mayor Saturacion de O2" />
+            android:text="@string/topSaturacion" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="presion"
-            android:text="Menor Presion Atmosferica" />
+            android:text="@string/topPresionAtm" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="temperatura"
-            android:text="Temperaturas mas altas" />
+            android:text="@string/topTemperaturas" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

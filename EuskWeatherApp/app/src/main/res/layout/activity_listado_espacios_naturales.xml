@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="52dp"
-        android:text="PLAYAS"
         android:onClick="mostrarPlayas"
+        android:text="@string/btnPlaya"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginBottom="52dp"
         android:onClick="mostrarRios"
-        android:text="RIOS"
+        android:text="@string/btnRios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPlayas" />
 
@@ -45,7 +45,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginBottom="52dp"
         android:onClick="mostrarPantanos"
-        android:text="PANTANOS"
+        android:text="@string/btnPantanos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRios" />
 </androidx.constraintlayout.widget.ConstraintLayout>

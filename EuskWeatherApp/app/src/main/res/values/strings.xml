@@ -14,6 +14,9 @@
     <string name="lblContrasenia">Contraseña:</string>
     <string name="btnLogin">LOGIN</string>
     <string name="btnRegistro">REGISTRATE</string>
+    <string name="errorLogin">ERROR- REVISA EL USUARIO O LA CONTRASEÑA</string>
+    <string name="errorComunicacion">ERROR_COMUNICACION</string>
+    <string name="errorGeneral">ERROR_GENERAL</string>
 
     <!--MENU PRINCIPAL-->
     <string name="salirMenu">ES NECESARIO CERRAR SESION</string>
@@ -54,5 +57,27 @@
     <!--MENU OPCIONES-->
     <string name="opcAcercaDe">Acerca de...</string>
     <string name="opcCambioContra">Cambiar contraseña</string>
+
+    <!--ESPACIO NATURAL ADAPTER-->
+    <string name="nomEspacioAdap">Nombre: </string>
+
+    <!--ACTIVITIES-->
+    <string name="lblNombre">Nombre: </string>
+    <string name="lblTipo">Tipo: </string>
+    <string name="lblTemperatura">Temperatura: </string>
+    <string name="lblCalidadAire">Calidad de aire: </string>
+    <string name="btnVerMapa">VER EN MAPA</string>
+    <string name="lblInfo">Informacion de: </string>
+    <string name="lblPresionAtm">Presion atm: </string>
+    <string name="lblFecha">Fecha: </string>
+    <string name="lblSaturacion">Saturacion O2: </string>
+    <string name="lblImagenSelec">IMAGEN SELECCIONADA</string>
+    <string name="btnPlaya">PLAYAS</string>
+    <string name="btnRios">RIOS</string>
+    <string name="btnPantanos">PANTANOS</string>
+    <string name="registrarUsu">REGISTRAR</string>
+    <string name="topSaturacion">Mayor Saturacion de O2</string>
+    <string name="topPresionAtm">Menor Presion Atmosferica</string>
+    <string name="topTemperaturas">Temperaturas mas altas</string>
 
 </resources>
