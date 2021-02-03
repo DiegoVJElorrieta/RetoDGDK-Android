@@ -89,10 +89,10 @@ public class InformacionMunicipio extends AppCompatActivity {
         }
 
         if(listaInfoMeteo.isEmpty()){
-            txtCoordenadas.setText("INFO NO DISPONIBLE");
-            txtHumedad.setText("INFO NO DISPONIBLE");
-            txtTemperatura.setText("INFO NO DISPONIBLE");
-            txtClima.setText("INFO NO DISPONIBLE");
+            txtCoordenadas.setText(R.string.infoNoDisponible);
+            txtHumedad.setText(R.string.infoNoDisponible);
+            txtTemperatura.setText(R.string.infoNoDisponible);
+            txtClima.setText(R.string.infoNoDisponible);
         }else {
             txtCoordenadas.setText(listaInfoMeteo.get(0).getPresionAtm() + " atm");
             txtHumedad.setText(listaInfoMeteo.get(0).getFecha());
@@ -241,7 +241,7 @@ public class InformacionMunicipio extends AppCompatActivity {
     }
 
     private void compartirFoto(Bitmap bitmap) throws IOException {
-        String aux = "Mira la foto que encontre de " + txtNomMunicipio.getText().toString();
+        String aux = R.string.msjCompartirFoto + txtNomMunicipio.getText().toString();
         File cachePath = new File(this.getCacheDir(), "imageview");
         cachePath.mkdirs();
         FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");

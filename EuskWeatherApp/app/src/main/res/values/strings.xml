@@ -79,5 +79,7 @@
     <string name="topSaturacion">Mayor Saturacion de O2</string>
     <string name="topPresionAtm">Menor Presion Atmosferica</string>
     <string name="topTemperaturas">Temperaturas mas altas</string>
+    <string name="infoNoDisponible">INFO NO DISPONIBLE</string>
+    <string name="msjCompartirFoto">Mira la foto que encontre de </string>
 
 </resources>
