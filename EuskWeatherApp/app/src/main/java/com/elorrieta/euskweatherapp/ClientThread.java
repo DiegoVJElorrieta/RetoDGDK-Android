@@ -81,7 +81,7 @@ public class ClientThread implements Runnable {
                     listado.add(fav);
                 }
             } else if(TopProvincias.Consulta_Saturacion == true) {
-                String sql = "SELECT p.nombreProv, m.nombreMuni, i.saturacionO2 FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion order by i.saturacionO2 DESC LIMIT 5";
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.saturacionO2 FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion where p.nombreProv = '"+ TopProvincias.Provincia  +"' order by i.saturacionO2 DESC LIMIT 5";
                 st = con.prepareStatement(sql);
                 rs = st.executeQuery();
                 while(rs.next()){
@@ -97,7 +97,7 @@ public class ClientThread implements Runnable {
                     listado.add(topO2);
                 }
             }else if(TopProvincias.Consulta_Presion == true) {
-                String sql = "SELECT p.nombreProv, m.nombreMuni, i.presionAtm FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion order by i.presionAtm ASC LIMIT 5";
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.presionAtm FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion where p.nombreProv = '"+ TopProvincias.Provincia  +"' order by i.presionAtm ASC LIMIT 5";
                 st = con.prepareStatement(sql);
                 rs = st.executeQuery();
                 while(rs.next()){
@@ -113,7 +113,7 @@ public class ClientThread implements Runnable {
                     listado.add(topATM);
                 }
             }else if(TopProvincias.Consulta_Temperatura == true) {
-                String sql = "SELECT p.nombreProv, m.nombreMuni, i.temperatura FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion WHERE i.temperatura <> 'Datos no disponibles' order by i.temperatura DESC LIMIT 5";
+                String sql = "SELECT p.nombreProv, m.nombreMuni, i.temperatura FROM provincias as p JOIN municipios as m ON p.idProv = m.idProvincia JOIN estacionmeteorologica as e on e.nomMunicipio = m.nombreMuni JOIN informacionmeteorologica as i on i.nomEstMet = e.nombreEstacion WHERE i.temperatura <> 'Datos no disponibles' AND p.nombreProv = '"+ TopProvincias.Provincia +"' order by i.temperatura DESC LIMIT 5";
                 st = con.prepareStatement(sql);
                 rs = st.executeQuery();
                 while(rs.next()){

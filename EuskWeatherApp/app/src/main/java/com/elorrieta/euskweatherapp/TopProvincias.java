@@ -9,6 +9,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,7 +19,9 @@ public class TopProvincias extends AppCompatActivity {
     public static boolean Consulta_Saturacion;
     public static boolean Consulta_Presion;
     public static boolean Consulta_Temperatura;
+    public static String Provincia;
 
+    public Spinner spinnerProv;
     private ArrayList<TopSaturO2> saturO2List;
     private ArrayList<TopPresionATM> presionATMList;
     private ArrayList<TopTemperatura> tempList;
@@ -29,13 +33,24 @@ public class TopProvincias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_provincias);
+
+        String[] arraySpinner = new String[] {
+                "Araba/Álava", "Bizkaia", "Gipuzkoa"
+        };
+        spinnerProv = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProv.setAdapter(adapter);
+
+
     }
 
     public void saturacionO2(View v){
         recyclerViewTopSatur = (RecyclerView) findViewById(R.id.recyclerViewTop);
 
         saturO2List = new ArrayList<>();
-
+        Provincia = spinnerProv.getSelectedItem().toString();
         try {
             if(isConnected()) {
                 Consulta_Saturacion = true;
@@ -52,6 +67,7 @@ public class TopProvincias extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTopSatur.setLayoutManager(linearLayoutManager);
+        Provincia = null;
         Consulta_Saturacion = false;
 
     }
@@ -61,6 +77,7 @@ public class TopProvincias extends AppCompatActivity {
 
         presionATMList = new ArrayList<>();
 
+        Provincia = spinnerProv.getSelectedItem().toString();
         try {
             if(isConnected()) {
                 Consulta_Presion = true;
@@ -77,6 +94,7 @@ public class TopProvincias extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTopSatur.setLayoutManager(linearLayoutManager);
+        Provincia = null;
         Consulta_Presion = false;
     }
 
@@ -85,6 +103,7 @@ public class TopProvincias extends AppCompatActivity {
 
         tempList = new ArrayList<>();
 
+        Provincia = spinnerProv.getSelectedItem().toString();
         try {
             if(isConnected()) {
                 Consulta_Temperatura = true;
@@ -101,6 +120,7 @@ public class TopProvincias extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTopSatur.setLayoutManager(linearLayoutManager);
+        Provincia = null;
         Consulta_Temperatura = false;
     }
 

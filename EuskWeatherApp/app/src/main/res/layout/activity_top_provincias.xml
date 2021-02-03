@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".TopProvincias">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTop"
         android:layout_width="407dp"
@@ -17,10 +25,9 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="410dp"
-        android:layout_height="143dp"
+        android:layout_width="231dp"
+        android:layout_height="134dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
@@ -43,5 +50,6 @@
             android:layout_height="wrap_content"
             android:onClick="temperatura"
             android:text="@string/topTemperaturas" />
+
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
