@@ -37,9 +37,9 @@ public class TopSaturO2Adapter extends RecyclerView.Adapter<TopSaturO2Adapter.Mi
     @Override
     public void onBindViewHolder(TopSaturO2Adapter.MiViewHolder holder, int position) {
         TopSaturO2 top = saturO2List.get(position);
-        holder.nombreProv.setText("Nombre Provincia: " + top.getNomProv());
-        holder.nombreMuni.setText("Municipio: " + top.getNomMuni());
-        holder.satur.setText("Saturacion de O2: " + top.getSaturO2());
+        holder.nombreProv.setText(holder.nombreProv.getText() + top.getNomProv());
+        holder.nombreMuni.setText(holder.nombreMuni.getText() + top.getNomMuni());
+        holder.satur.setText(holder.satur.getText() + top.getSaturO2());
         holder.separador.setText("-----------------------------------");
     }
 

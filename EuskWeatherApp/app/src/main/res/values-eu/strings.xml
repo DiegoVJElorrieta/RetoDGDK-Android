@@ -6,93 +6,97 @@
     <string name="descriAcercaDe">App eginda EuskWeather Group taldeagarik</string>
     <string name="usuarioExiste">"ERABILTZAILEA EXISTITZEN DA "</string>
     <string name="usuarioNoValido">ERABILTZAILE HAU EZ DAGO DATUBASEAN</string>
-    <string name="inicioSesionCorrecto">INICIO DE SESION EXITOSO</string>
-    <string name="contraIncorrecta">CONTRASEÑA INCORRECTA</string>
-    <string name="hintUsuario">Usuario</string>
-    <string name="lblUsuario">Usuario:</string>
-    <string name="hintContrasenia">Contraseña</string>
-    <string name="lblContrasenia">Contraseña:</string>
+    <string name="inicioSesionCorrecto">SAIOA SARRERA ONA</string>
+    <string name="contraIncorrecta">PASAHITZA OKERRA</string>
+    <string name="hintUsuario">Erabiltzailea</string>
+    <string name="lblUsuario">Erabiltzailea:</string>
+    <string name="hintContrasenia">Pasahitza</string>
+    <string name="lblContrasenia">Pasahitza:</string>
     <string name="btnLogin">LOGIN</string>
-    <string name="btnRegistro">REGISTRATE</string>
-    <string name="errorLogin">ERROR- REVISA EL USUARIO O LA CONTRASEÑA</string>
-    <string name="errorComunicacion">ERROR_COMUNICACION</string>
-    <string name="errorGeneral">ERROR_GENERAL</string>
+    <string name="btnRegistro">ERREGISTRATU</string>
+    <string name="errorLogin">ERROREA - ERABILTZAILEA EDO PASAHITZ TXARRAK</string>
+    <string name="errorComunicacion">KOMUNIKAZIO_ERROREA</string>
+    <string name="errorGeneral">ERROR_GENERALA</string>
 
     <!--MENU PRINCIPAL-->
-    <string name="salirMenu">ES NECESARIO CERRAR SESION</string>
-    <string name="cierreSesionCorrecto">SESION CERRADA CORRECTAMENTE</string>
-    <string name="lblBienvenido">Bienvenido</string>
-    <string name="lblPregunta">¿Qué desea hacer?</string>
-    <string name="btnListaMunicipios">LISTA DE MUNICIPIOS</string>
-    <string name="btnListaEspaciosNaturales">LISTA DE ESPACIOS NATURALES</string>
-    <string name="btnMisFavoritos">MIS FAVORITOS</string>
-    <string name="btnTopListados">TOP LISTADOS</string>
-    <string name="btnCerrarSesion">CERRAR SESION</string>
+    <string name="salirMenu">SAIOA ITXI BEHAR DA</string>
+    <string name="cierreSesionCorrecto">SAIOA ITXITA</string>
+    <string name="lblBienvenido">Ongi etorri</string>
+    <string name="lblPregunta">Zer egin nahi duzu?</string>
+    <string name="btnListaMunicipios">UDALERRI ZERRENDA</string>
+    <string name="btnListaEspaciosNaturales">INGURU NATURALEN ZERRENDA</string>
+    <string name="btnMisFavoritos">GOGOKOENAK</string>
+    <string name="btnTopListados">TOP ZERRENDAK</string>
+    <string name="btnCerrarSesion">SAIOA ITXI</string>
 
     <!--REGISTRO USUARIOS-->
-    <string name="camposVaciosRegistro">DEBES RELLENAR TODOS LOS CAMPOS</string>
-    <string name="contrasNoCoinciden">LAS CONTRASEÑAS NO COINCIDEN</string>
-    <string name="nomUsuarioVacio">DEBES ESTABLECER UN NOMBRE DE USUARIO</string>
-    <string name="contrasVacias">DEBES ESTABLECER UNA CONTRASEÑA</string>
-    <string name="tituloUsuCreado">USUARIO CREADO</string>
-    <string name="descriUsuCreado">Pulse ok para regresar a inicio.</string>
-    <string name="lblNomApellidos">Nombre y apellidos:</string>
-    <string name="hintNomApellidos">Nombre y apellidos</string>
-    <string name="lblDireccion">Direccion:</string>
-    <string name="hintDireccion">Direccion</string>
-    <string name="lblCorreoElectronico">Correo electrónico:</string>
-    <string name="hintCorreoElectronico">Correo electrónico</string>
-    <string name="lblNomUsuario">Nombre de usuario:</string>
-    <string name="hintNomUsuario">Nombre de usuario</string>
-    <string name="lblContra">Contraseña:</string>
-    <string name="lblContraConfirm">Confirmar contraseña:</string>
+    <string name="camposVaciosRegistro">INFORMAZIO GUZTIA BETE BEHAR DA</string>
+    <string name="contrasNoCoinciden">PASAHITZAK BERDINAK IZAN BEHAR DIRA</string>
+    <string name="nomUsuarioVacio">ERABILTZAILE IZENA IDATZI BEHAR DUZU</string>
+    <string name="contrasVacias">PASAHITZA IDATZI BEHAR DUZU</string>
+    <string name="tituloUsuCreado">ERABILTZAILEA SORTUTA</string>
+    <string name="descriUsuCreado">Ok sakatu bueltatzeko.</string>
+    <string name="lblNomApellidos">Izena eta abizenak:</string>
+    <string name="hintNomApellidos">Izena eta abizenak</string>
+    <string name="lblDireccion">Helbidea:</string>
+    <string name="hintDireccion">Helbidea</string>
+    <string name="lblCorreoElectronico">Helbide elektronikoa:</string>
+    <string name="hintCorreoElectronico">Helbide elektronikoa</string>
+    <string name="lblNomUsuario">Erabiltzaile izena:</string>
+    <string name="hintNomUsuario">Erabiltzaile izena</string>
+    <string name="lblContra">Pasahitza:</string>
+    <string name="lblContraConfirm">Pasahitza errepikatu:</string>
 
     <!--LISTADO MUNICIPIOS-->
-    <string name="tituloMenuContextual">Pulsa sobre la opcion deseada</string>
+    <string name="tituloMenuContextual">Sakatu aukera</string>
 
     <!--MENU CONTEXTUAL LISTADOS-->
-    <string name="opcInfo">Información</string>
-    <string name="opcAgregarImg">Agregar imagen</string>
+    <string name="opcInfo">Informazioa</string>
+    <string name="opcAgregarImg">Argazkia gehitu</string>
 
     <!--MUNICIPIOS-->
-    <string name="nombreMuniAdap">Nombre municipio: </string>
-    <string name="alcaldeMuniAdap">Alcalde: </string>
-    <string name="webMuniAdap">Web municipio: </string>
-    <string name="alertTituloInfoMuni">INFO DEL MUNICIPIO</string>
-    <string name="aniadirFavorito">AÑADIR A FAVORITOS</string>
-    <string name="quitarFavorito">ELIMINAR DE FAVORITOS</string>
-    <string name="masInfo">MAS INFORMACION</string>
-    <string name="cerrarAlert">CERRAR</string>
+    <string name="nombreMuniAdap">"Udalerri izena: "</string>
+    <string name="alcaldeMuniAdap">"Alkatea: "</string>
+    <string name="webMuniAdap">"Webgunea: "</string>
+    <string name="alertTituloInfoMuni">UDALERRI INFO</string>
+    <string name="aniadirFavorito">GOGOKOETARA GEHITU</string>
+    <string name="quitarFavorito">GOGOKOETATIK EZABATU</string>
+    <string name="masInfo">INFORMAZIO GEHIAGO</string>
+    <string name="cerrarAlert">ITXI</string>
 
     <!--MENU OPCIONES-->
-    <string name="opcAcercaDe">Acerca de...</string>
-    <string name="opcCambioContra">Cambiar contraseña</string>
+    <string name="opcAcercaDe">Honi buruz...</string>
+    <string name="opcCambioContra">Pasahitza aldatu</string>
 
     <!--ESPACIO NATURAL ADAPTER-->
-    <string name="nomEspacioAdap">Nombre: </string>
-    <string name="descriEspacioAdap">Descripcion: </string>
-    <string name="tipoEspacioAdap">Tipo: </string>
-    <string name="alertTituloEspNat">INFO DEL ESPACIO NATURAL</string>
+    <string name="nomEspacioAdap">"Izena: "</string>
+    <string name="descriEspacioAdap">"Deskribapena: "</string>
+    <string name="tipoEspacioAdap">"Tipoa: "</string>
+    <string name="alertTituloEspNat">INGURU NATURALAREN INFO</string>
+    <string name="nomProv">"Probintziaren izena: "</string>
+    <string name="saturacionTop">"O2 Saturazioa: "</string>
+    <string name="temperaturaTop">"Tenperatura: "</string>
+    <string name="presionTop">"Presio atmosferikoa: "</string>
 
     <!--ACTIVITIES-->
-    <string name="lblNombre">Nombre: </string>
-    <string name="lblTipo">Tipo: </string>
-    <string name="lblTemperatura">Temperatura: </string>
-    <string name="lblCalidadAire">Calidad de aire: </string>
-    <string name="btnVerMapa">VER EN MAPA</string>
-    <string name="lblInfo">Informacion: </string>
-    <string name="lblPresionAtm">Presion atm: </string>
-    <string name="lblFecha">Fecha: </string>
-    <string name="lblSaturacion">Saturacion O2: </string>
-    <string name="lblImagenSelec">IMAGEN SELECCIONADA</string>
-    <string name="btnPlaya">PLAYAS</string>
-    <string name="btnRios">RIOS</string>
-    <string name="btnPantanos">PANTANOS</string>
-    <string name="registrarUsu">REGISTRAR</string>
-    <string name="topSaturacion">Mayor Saturacion de O2</string>
-    <string name="topPresionAtm">Menor Presion Atmosferica</string>
-    <string name="topTemperaturas">Temperaturas mas altas</string>
-    <string name="infoNoDisponible">INFO NO DISPONIBLE</string>
-    <string name="msjCompartirFoto">Mira la foto que encontre de </string>
+    <string name="lblNombre">"Izena: "</string>
+    <string name="lblTipo">"Tipoa: "</string>
+    <string name="lblTemperatura">"Tenperatura: "</string>
+    <string name="lblCalidadAire">"Airearen kalitatea: "</string>
+    <string name="btnVerMapa">MAPAN IKUSI</string>
+    <string name="lblInfo">"Informazioa: "</string>
+    <string name="lblPresionAtm">"Atm presioa: "</string>
+    <string name="lblFecha">"Data: "</string>
+    <string name="lblSaturacion">"O2 Saturazioa: "</string>
+    <string name="lblImagenSelec">AUKERATUTAKO ARGAZKIA</string>
+    <string name="btnPlaya">HONDARTZAK</string>
+    <string name="btnRios">IBAIAK</string>
+    <string name="btnPantanos">PADURAK</string>
+    <string name="registrarUsu">ERREGISTRATU</string>
+    <string name="topSaturacion">Gehien duen O2 saturazioa</string>
+    <string name="topPresionAtm">Presio atm baxuena.</string>
+    <string name="topTemperaturas">Tenperatura altuenak</string>
+    <string name="infoNoDisponible">INFO EZ DAGO</string>
+    <string name="msjCompartirFoto">-ren argazki hau begiratu</string>
 
 </resources>

@@ -37,9 +37,9 @@ public class TopPresionATMAdapter extends RecyclerView.Adapter<TopPresionATMAdap
     @Override
     public void onBindViewHolder(MiViewHolder holder, int position) {
         TopPresionATM topATM = presionATMList.get(position);
-        holder.nombreProv.setText("Nombre Provincia: " + topATM.getNomProv());
-        holder.nombreMuni.setText("Municipio: " + topATM.getNomMuni());
-        holder.Presion.setText("Presion Atmosferica: " + topATM.getPresion());
+        holder.nombreProv.setText(holder.nombreProv.getText() + topATM.getNomProv());
+        holder.nombreMuni.setText(holder.nombreMuni.getText() + topATM.getNomMuni());
+        holder.Presion.setText(holder.Presion.getText() + topATM.getPresion());
         holder.separador.setText("-----------------------------------");
     }
 

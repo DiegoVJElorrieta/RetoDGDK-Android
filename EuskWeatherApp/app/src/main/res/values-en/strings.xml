@@ -20,7 +20,7 @@
 
     <!--MENU PRINCIPAL-->
     <string name="salirMenu">YOU MUST LOG OUT</string>
-    <string name="cierreSesionCorrecto">YOU HAVE LOG OUT</string>
+    <string name="cierreSesionCorrecto">YOU LOG OUT</string>
     <string name="lblBienvenido">Welcome</string>
     <string name="lblPregunta">What do you want to do?</string>
     <string name="btnListaMunicipios">MUNICIPALITY LIST</string>
@@ -73,6 +73,10 @@
     <string name="descriEspacioAdap">"Description: "</string>
     <string name="tipoEspacioAdap">"Type: "</string>
     <string name="alertTituloEspNat">NATURAL ENVIROMENT INFO</string>
+    <string name="nomProv">"Province name: "</string>
+    <string name="saturacionTop">"O2 Saturation: "</string>
+    <string name="temperaturaTop">"Temperature: "</string>
+    <string name="presionTop">"Atmospheric pressure: "</string>
 
     <!--ACTIVITIES-->
     <string name="lblNombre">"Name: "</string>

@@ -8,17 +8,20 @@
         android:id="@+id/nomProv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/nomProv"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/nombMuni"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/nombreMuniAdap"/>
 
     <TextView
         android:id="@+id/temperatura"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/temperaturaTop"/>
 
     <TextView
         android:layout_width="wrap_content"

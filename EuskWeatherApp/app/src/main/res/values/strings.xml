@@ -73,6 +73,10 @@
     <string name="descriEspacioAdap">Descripcion: </string>
     <string name="tipoEspacioAdap">Tipo: </string>
     <string name="alertTituloEspNat">INFO DEL ESPACIO NATURAL</string>
+    <string name="nomProv">Nombre provincia: </string>
+    <string name="saturacionTop">Saturacion de O2: </string>
+    <string name="temperaturaTop">Temperatura: </string>
+    <string name="presionTop">Presion atmosferica: </string>
 
     <!--ACTIVITIES-->
     <string name="lblNombre">Nombre: </string>

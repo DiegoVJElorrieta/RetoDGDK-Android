@@ -37,9 +37,9 @@ public class TopTemperaturaAdapter extends RecyclerView.Adapter<TopTemperaturaAd
     @Override
     public void onBindViewHolder(MiViewHolder holder, int position) {
         TopTemperatura topTemp = tempList.get(position);
-        holder.nombreProv.setText("Nombre Provincia: " + topTemp.getNomProv());
-        holder.nombreMuni.setText("Municipio: " + topTemp.getNomMuni());
-        holder.temperatura.setText("Temperatura: " + topTemp.getTemperatura());
+        holder.nombreProv.setText(holder.nombreProv.getText() + topTemp.getNomProv());
+        holder.nombreMuni.setText(holder.nombreMuni.getText() + topTemp.getNomMuni());
+        holder.temperatura.setText(holder.temperatura.getText() + topTemp.getTemperatura());
         holder.separador.setText("-----------------------------------");
     }
 
