@@ -77,7 +77,7 @@ public class TopProvincias extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTopSatur.setLayoutManager(linearLayoutManager);
-        Consulta_Saturacion = false;
+        Consulta_Presion = false;
     }
 
     public void temperatura(View v) {

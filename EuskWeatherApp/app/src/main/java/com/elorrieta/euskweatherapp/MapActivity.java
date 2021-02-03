@@ -40,13 +40,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 List<Address> address = geocoder.getFromLocationName(ListadoMunicipios.nomMapa, maxResultados);
                 LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
                 mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoMunicipios.nomMapa));
-                mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(oElorrieta, 14f));
                 ListadoMunicipios.nomMapa = null;
             } else if (ListadoEspaciosNaturales.nombreEspacioNatural != null){
                 List<Address> address = geocoder.getFromLocationName(ListadoEspaciosNaturales.nombreEspacioNatural, maxResultados);
                 LatLng oElorrieta = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
                 mapa.addMarker(new MarkerOptions().position(oElorrieta).title(ListadoEspaciosNaturales.nombreEspacioNatural));
-                mapa.moveCamera(CameraUpdateFactory.newLatLng(oElorrieta));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(oElorrieta, 12f));
                 ListadoEspaciosNaturales.nombreEspacioNatural = null;
             }
 
