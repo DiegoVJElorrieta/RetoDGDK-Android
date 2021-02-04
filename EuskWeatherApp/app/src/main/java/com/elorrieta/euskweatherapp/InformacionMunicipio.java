@@ -188,7 +188,6 @@ public class InformacionMunicipio extends AppCompatActivity {
 
     }
 
-
     private void abrirCamara(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i, 1);
@@ -219,24 +218,6 @@ public class InformacionMunicipio extends AppCompatActivity {
         String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
 
         return imagenString;
-    }
-
-    private File crearImagen() throws IOException {
-        String nombreImagen = "foto_";
-        File directorio = getExternalFilesDir(Environment.DIRECTORY_DCIM);
-        File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);
-
-        rutaImagen = imagen.getAbsolutePath();
-        return imagen;
-    }
-
-    private void compartir() throws IOException {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        String aux = "Mira la foto que encontre de " + txtNomMunicipio.getText().toString() + ":\n";
-        i.putExtra(Intent.EXTRA_TEXT, aux);
-
-        startActivity(i);
     }
 
     private void compartirFoto(Bitmap bitmap) throws IOException {
